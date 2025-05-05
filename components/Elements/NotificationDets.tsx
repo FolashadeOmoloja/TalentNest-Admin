@@ -35,10 +35,10 @@ const NotificationDets = ({
           {notifications.map((item, idx) => (
             <li
               key={idx}
-              className="border-[#CCD2D9] border rounded-md p-6 max-sm:p-3 shadow-lg"
+              className="border-[#CCD2D9] border bg-white rounded-2xl p-6 max-sm:p-3 shadow-md"
             >
-              <div className="flex gap-14 max-sm:gap-4">
-                <div className="bg-[#010D3E] text-[#00B5E8] centered rounded-full min-w-12 h-12">
+              <div className="flex gap-7 items-center max-sm:gap-4">
+                <div className="bg-[#010D3E] text-[#eaeefe] centered rounded-full min-w-12 h-12">
                   <IoMdNotifications className="text-2xl" />
                 </div>
                 <div className="max-sm:text-sm notice-div">
@@ -66,7 +66,7 @@ const NotificationDets = ({
           ))}
           <button
             onClick={deleteAllNotification}
-            className="py-4 px-6 max-w-[300px] mt-10 bg-[#010D3E] text-white rounded-md font-semibold btn-hover"
+            className="py-4 px-6 max-w-[300px] mt-10 bg-black text-white rounded-md font-semibold btn-hover"
           >
             Clear All Notification
           </button>

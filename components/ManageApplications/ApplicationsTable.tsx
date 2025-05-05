@@ -68,7 +68,7 @@ const ApplicationsTable = () => {
       </div>
       {changeTable === 0 ? (
         underReview.length === 0 ? (
-          <p className="mt-10 text-[#000040] italic text-2xl">
+          <p className="mt-10 text-[#010D3E] italic text-2xl">
             No data available at the moment.
           </p>
         ) : (
@@ -80,7 +80,7 @@ const ApplicationsTable = () => {
         )
       ) : changeTable === 1 ? (
         interview.length === 0 ? (
-          <p className="mt-10 text-[#000040] italic text-2xl">
+          <p className="mt-10 text-[#010D3E] italic text-2xl">
             No data available at the moment.
           </p>
         ) : (
@@ -92,7 +92,7 @@ const ApplicationsTable = () => {
         )
       ) : changeTable === 2 ? (
         hired.length === 0 ? (
-          <p className="mt-10 text-[#000040] italic text-2xl">
+          <p className="mt-10 text-[#010D3E] italic text-2xl">
             No data available at the moment.
           </p>
         ) : (
@@ -104,7 +104,7 @@ const ApplicationsTable = () => {
         )
       ) : changeTable === 3 ? (
         declined.length === 0 ? (
-          <p className="mt-10 text-[#000040] italic text-2xl">
+          <p className="mt-10 text-[#010D3E] italic text-2xl">
             No data available at the moment.
           </p>
         ) : (

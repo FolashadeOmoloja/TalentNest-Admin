@@ -50,10 +50,10 @@ const JobTable = () => {
         <FaArrowLeft />
         <span>Go back</span>
       </div>
-      <h2 className="text-2xl font-bold mb-1">
+      <h2 className="text-2xl font-bold mb-1 bg-text">
         Job Listings of TalentNest's companies
       </h2>
-      <span className="text-[#7C8698]">
+      <span className="text-gray-500">
         TalentNest's complete job list overview
       </span>
       <div className="flex w-full text-[#626263] md:text-lg font-bold mt-16 border-b border-[#CCD2D9]">
@@ -72,7 +72,7 @@ const JobTable = () => {
         loading ? (
           <Loader2 className=" h-14 w-14 animate-spin ml-10 mt-10 text-[#010D3E]" />
         ) : openedJobs.length === 0 ? (
-          <p className="mt-10 text-[#000040] italic text-2xl">
+          <p className="mt-10 text-[#010D3E] italic text-2xl">
             No data available at the moment.
           </p>
         ) : (
@@ -85,7 +85,7 @@ const JobTable = () => {
         loading ? (
           <Loader2 className=" h-14 w-14 animate-spin ml-10 mt-10 text-[#010D3E]" />
         ) : closedJobs.length === 0 ? (
-          <p className="mt-10 text-[#000040] italic text-2xl">
+          <p className="mt-10 text-[#010D3E] italic text-2xl">
             No data available at the moment.
           </p>
         ) : (

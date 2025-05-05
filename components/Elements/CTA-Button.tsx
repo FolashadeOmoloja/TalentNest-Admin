@@ -24,7 +24,7 @@ const CTABTN: React.FC<ButtonProps> = ({
   route,
   height = "55px",
   width = "w-[130px]",
-  backGround = "bg-[#010D3E]",
+  backGround = "bg-black",
   color = "text-white",
   height2,
   isFunc = false,

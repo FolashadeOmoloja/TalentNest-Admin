@@ -22,7 +22,7 @@ const SuccessHireTable = () => {
         <span>Go back</span>
       </div>
       <h2 className="text-2xl font-bold mb-1">Successful Job Placements</h2>
-      <span className="text-[#7C8698]">Summary of completed hires</span>
+      <span className="text-gray-500">Summary of completed hires</span>
       <div className="flex w-full text-[#010D3E] md:text-lg font-bold mt-16 border-b-[3px] border-[#010D3E]">
         <span className={`tab active max-sm:h-[50px]`}>
           Completed Hires Review
@@ -32,7 +32,7 @@ const SuccessHireTable = () => {
       {loading ? (
         <Loader2 className=" h-14 w-14 animate-spin ml-10 mt-10 text-[#010D3E]" />
       ) : successApplications.length === 0 ? (
-        <p className="mt-10 text-[#000040] italic text-2xl">
+        <p className="mt-10 text-[#010D3E] italic text-2xl">
           No data available at the moment.
         </p>
       ) : (

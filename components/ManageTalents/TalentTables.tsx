@@ -48,7 +48,7 @@ const TalentTable = () => {
         <FaArrowLeft />
         <span>Go back</span>
       </div>
-      <h2 className="text-2xl font-bold mb-1">
+      <h2 className="text-2xl font-bold mb-1 bg-text">
         Manage TalentNest's Talent Pool
       </h2>
       <div className="flex w-full text-[#626263] md:text-lg font-bold mt-16 border-b border-[#CCD2D9]">
@@ -66,7 +66,7 @@ const TalentTable = () => {
         loading ? (
           <Loader2 className=" h-14 w-14 animate-spin ml-10 mt-10 text-[#010D3E]" />
         ) : talents.length === 0 ? (
-          <p className="mt-10 text-[#000040] italic text-2xl">
+          <p className="mt-10 text-[#010D3E] italic text-2xl">
             No data available at the moment.
           </p>
         ) : (
@@ -76,7 +76,7 @@ const TalentTable = () => {
         loading ? (
           <Loader2 className=" h-14 w-14 animate-spin ml-10 mt-10 text-[#010D3E]" />
         ) : talents.length === 0 ? (
-          <p className="mt-10 text-[#000040] italic text-2xl">
+          <p className="mt-10 text-[#010D3E] italic text-2xl">
             No data available at the moment.
           </p>
         ) : (
@@ -86,7 +86,7 @@ const TalentTable = () => {
         loading ? (
           <Loader2 className=" h-14 w-14 animate-spin ml-10 mt-10 text-[#010D3E]" />
         ) : talents.length === 0 ? (
-          <p className="mt-10 text-[#000040] italic text-2xl">
+          <p className="mt-10 text-[#010D3E] italic text-2xl">
             No data available at the moment.
           </p>
         ) : (

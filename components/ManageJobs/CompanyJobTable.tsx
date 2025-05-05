@@ -57,8 +57,10 @@ const CompanyJobTable = () => {
         <FaArrowLeft />
         <span>Go back</span>
       </div>
-      <h2 className="text-2xl font-bold mb-1">{companyName} Job Postings</h2>
-      <span className="text-[#7C8698]">Complete job post overview</span>
+      <h2 className="text-2xl font-bold mb-1 bg-text">
+        {companyName} Job Postings
+      </h2>
+      <span className="text-gray-500">Complete job post overview</span>
       <div className="flex w-full text-[#626263] md:text-lg font-bold mt-16 border-b border-[#CCD2D9]">
         {filterArr.map((item, idx) => (
           <span
@@ -75,7 +77,7 @@ const CompanyJobTable = () => {
         loading ? (
           <Loader2 className=" h-14 w-14 animate-spin ml-10 mt-10 text-[#010D3E]" />
         ) : openedJobs.length === 0 ? (
-          <p className="mt-10 text-[#000040] italic text-2xl">
+          <p className="mt-10 text-[#010D3E] italic text-2xl">
             No data available at the moment.
           </p>
         ) : (
@@ -88,7 +90,7 @@ const CompanyJobTable = () => {
         loading ? (
           <Loader2 className=" h-14 w-14 animate-spin ml-10 mt-10 text-[#010D3E]" />
         ) : closedJobs.length === 0 ? (
-          <p className="mt-10 text-[#000040] italic text-2xl">
+          <p className="mt-10 text-[#010D3E] italic text-2xl">
             No data available at the moment.
           </p>
         ) : (
@@ -101,7 +103,7 @@ const CompanyJobTable = () => {
         loading ? (
           <Loader2 className=" h-14 w-14 animate-spin ml-10 mt-10 text-[#010D3E]" />
         ) : hiredCandidates.length === 0 ? (
-          <p className="mt-10 text-[#000040] italic text-2xl">
+          <p className="mt-10 text-[#010D3E] italic text-2xl">
             No data available at the moment.
           </p>
         ) : (

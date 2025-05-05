@@ -73,11 +73,11 @@ const FilterBox: React.FC<FilterBoxProps> = ({
         </form>
       </div>
       {initialFilter.length === 0 ? (
-        <p className="mt-10 text-[#000040] italic text-2xl">
+        <p className="mt-10 text-[#010D3E] italic text-2xl">
           No data available at the moment.
         </p>
       ) : (
-        <ul className="text-[#7C8698] font-medium mt-8 flex flex-col gap-3">
+        <ul className="text-gray-500 font-medium mt-8 flex flex-col gap-3">
           {initialFilter.map((item, idx) => (
             <li
               className="flex justify-between cursor-pointer items-center"

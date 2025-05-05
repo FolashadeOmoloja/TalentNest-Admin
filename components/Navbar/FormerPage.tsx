@@ -8,7 +8,6 @@ import {
 import { useGetAllEmployed } from "@/hooks/application-hook";
 import { useGetAllJobs } from "@/hooks/jobPosts-hook";
 import { JobPosted, userObject } from "@/utilities/typeDefs";
-import { Briefcase, FileText, LayoutDashboard, Users } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
@@ -78,52 +77,46 @@ const page = () => {
   const shortList = talents.length != 0 ? filterTalents("shortlist") : [];
   const hiringList = companies.length != 0 ? filterCompanies("recruiting") : [];
   const openedJobs = jobs.length != 0 ? filterJobs("open") : [];
+  const closedJobs = jobs.length != 0 ? filterJobs("closed") : [];
 
   const companyAnalytics = [
     {
-      analtyticsTitle: "Job Offers",
+      analtyticsTitle: "Total Job Offers",
       stats: jobs.length != 0 ? jobs.length : 0,
-      desc: <Briefcase />,
+      desc: `${openedJobs.length} active job listings`,
+      link: "/control-room/manage-jobs",
+      linkName: "Manage Jobs",
     },
     {
-      analtyticsTitle: "Nested Talents",
+      analtyticsTitle: "Total Talents Registered",
       stats: talents.length != 0 ? talents.length : 0,
-      desc: <Users />,
+      desc: `${shortList.length} talents shortlisted on TalentNest`,
+      link: "/control-room/manage-talents",
+      linkName: "Manage Talents",
     },
     {
-      analtyticsTitle: "Nested Companies",
+      analtyticsTitle: "Total Companies Registered",
       stats: companies.length != 0 ? companies.length : 0,
-      desc: <LayoutDashboard />,
+      desc: `${hiringList.length} compan${
+        hiringList.length === 1 ? "y" : "ies"
+      } currently hiring`,
+      link: "/control-room/manage-companies",
+      linkName: "Manage Companies",
     },
     {
       analtyticsTitle: "Employed Talents",
       stats: uniqueTalents.length != 0 ? uniqueTalents.length : 0,
-      desc: <FileText />,
+      desc: `${uniqueJobs.length != 0 ? uniqueJobs.length : 0} Job Categories`,
+      link: "/control-room/successful-hires",
+      linkName: "View Details",
     },
   ];
-
-  const chartData = [
-    { name: "Jan", jobs: 3, talents: 2 },
-    { name: "Feb", jobs: 4, talents: 3 },
-    { name: "Mar", jobs: 5, talents: 4 },
-    { name: "Apr", jobs: 6, talents: 5 },
-    { name: "May", jobs: 7, talents: 6 },
-  ];
-
   return (
     <>
-      <DashboardNavbar />
+      <DashboardNavbar activeItem={0} />
       <DashboardLayout
+        dashInfo="This provides a summary of your TalentNest details"
         analytics={companyAnalytics}
-        chartData={chartData}
-        stat1={`${openedJobs.length} active job listings`}
-        stat2={`${shortList.length} talents shortlisted on TalentNest`}
-        stat3={`${hiringList.length} compan${
-          hiringList.length === 1 ? "y" : "ies"
-        } currently hiring`}
-        stat4={`${
-          uniqueJobs.length != 0 ? uniqueJobs.length : 0
-        } Job Categories`}
       />
     </>
   );

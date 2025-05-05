@@ -33,7 +33,7 @@
 
 @layer components {
   .navItem {
-    @apply fixed  top-[96px] left-0 bottom-0 px-9 py-5 max-sm:px-4  transform transition-transform duration-700 ease-in-out bg-white z-30 w-full;
+    @apply fixed  top-[96px] left-0 bottom-0 px-9 py-5 max-sm:px-4  transform transition-transform duration-700 ease-in-out bg-[#EAEEFE] z-30 w-full;
   }
 
   .section-container {
@@ -80,17 +80,20 @@
   .login-btn {
     @apply w-full h-12 bg-[#010D3E] text-white shadow-sm rounded-lg hover:shadow-xl hover:bg-[#001354] transition-all duration-300;
   }
-  .btn-hover {
-    @apply hover:shadow-xl hover:bg-[#001354] transition-all duration-300;
+  .table-btn {
+    @apply form-btn  max-w-[200px] mt-10 font-semibold;
   }
 
   .dashboard-container {
-    @apply relative top-24 py-20 px-[100px] max-xlg:px-[50px] max-xlg:py-[50px] max-sm:px-4;
+    @apply relative top-24 py-16 px-[100px] max-xlg:px-[50px] max-xlg:py-[50px] max-sm:px-4;
   }
 
   .notice-div a {
     @apply text-[#010D3E] font-semibold;
   }
+}
+.dash-nav {
+  @apply bg-white cursor-pointer shadow-sm centered w-[51px] h-[51px] rounded-full text-[24px] text-[#010D3E];
 }
 
 @keyframes slideIn {

@@ -5,7 +5,7 @@ const ProfileBox = ({ title, details }: { title: string; details: string }) => {
   return (
     <div className="flex w-full border-b border-gray-200 py-5 max-sm:h-[89px] gap-4 max-slg:flex-col">
       <span className="text-[#1B2C42] font-semibold basis-[30%]">{title}</span>
-      <span className="text-[#7C8698] basis-[70%]">{details}</span>
+      <span className="text-gray-500 basis-[70%]">{details}</span>
     </div>
   );
 };

@@ -1,106 +1,70 @@
-"use client";
 import React, { useState } from "react";
 import { HiMiniBars3BottomLeft, HiMiniChevronRight } from "react-icons/hi2";
 import { ImCross } from "react-icons/im";
-import CTABTN from "../Elements/CTA-Button";
 import { useRouter } from "next/navigation";
 import UserAvatar from "@/components/Elements/UserAvatar";
-import { useSelector } from "react-redux";
+import Logo from "@/components/Elements/Logo";
+import CTABTN from "../Elements/CTA-Button";
 
 type NavLinks = {
-  navItem: string;
+  id: string;
+  navItem: string | JSX.Element;
   href: string;
 }[];
 
-type DropDown = {
-  navItem: string;
-  icon: string;
-  href: string;
-}[];
-const DashboardMobileNav = ({
-  NavLinks,
-  DropDown,
-  buttonLink,
-  buttonCta,
-}: {
-  NavLinks: NavLinks;
-  DropDown: DropDown;
-  buttonLink: string;
-  buttonCta: string;
-}) => {
+const DashboardMobileNav = ({ NavLinks }: { NavLinks: NavLinks }) => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
-  const { user } = useSelector((store: any) => store.auth);
 
   return (
     <nav className="md:hidden relative ">
-      <section className="fixed inset-0 flex justify-between items-center h-24 px-9 max-sm:px-4  bg-white z-40">
+      <section className="fixed inset-0 flex justify-between items-center h-24 px-9 max-sm:px-4  bg-[#EAEEFE] z-40">
         {isOpen ? (
           <button onClick={() => setIsOpen(!isOpen)}>
-            <ImCross className="text-3xl text-[#010D3E] " />
+            <ImCross className="text-2xl text-[#001354] " />
           </button>
         ) : (
           <button onClick={() => setIsOpen(!isOpen)}>
-            <HiMiniBars3BottomLeft className="text-3xl text-[#010D3E] " />
+            <HiMiniBars3BottomLeft className="text-2xl text-[#001354] " />
           </button>
         )}
-        <div onClick={() => router.push("/")}>
-          <img
-            src="/images/homepage/TalentNestlogo.png"
-            alt="logo"
-            className="max-sm:w-[119px]"
-          />
+        <div
+          className="cursor-pointer flex items-center"
+          onClick={() => router.push("/control-room")}
+        >
+          <Logo width="35" height="35" text="text-[20px]" gap="gap-1" />
         </div>
         <div className="max-xsm:hidden">
-          <UserAvatar dropDown={DropDown} />
+          <UserAvatar />
         </div>
       </section>
       {
         <section
           className={`${
             isOpen ? "translate-y-0 opacity-1" : "-translate-y-full opacity-0"
-          } navItem`}
+          } navItem `}
         >
           {NavLinks.map((item, idx) => (
-            <ul className={`flex flex-col gap-14 mb-8`} key={idx}>
-              <li
-                className="sm:text-lg font-semibold text-[#010D3E] flex justify-between"
-                onClick={() => router.push(item.href)}
-              >
-                <span>{item.navItem}</span>
-                <span>
-                  <HiMiniChevronRight />
-                </span>
-              </li>
+            <ul className={`flex flex-col mb-6`} key={idx}>
+              {item.id === "Sign Out" ? null : (
+                <li
+                  className="sm:text-lg font-semibold text-[#001354] flex justify-between"
+                  onClick={() => router.push(item.href)}
+                >
+                  <span>{item.id}</span>
+                  <span>
+                    <HiMiniChevronRight />
+                  </span>
+                </li>
+              )}
             </ul>
           ))}
-          <ul className={`flex flex-col gap-14 mb-8`}>
-            <li
-              className="sm:text-lg font-semibold text-[#010D3E] flex justify-between"
-              onClick={() => router.push(DropDown[0].href)}
-            >
-              <span>{DropDown[0].navItem}</span>
-              <span>
-                <HiMiniChevronRight />
-              </span>
-            </li>
-          </ul>
-          <div className="flex flex-col md:hidden   gap-4">
-            <div className="xsm:hidden">
-              <UserAvatar dropDown={DropDown} />
-            </div>
-            {user?.accountRole === "SuperAdmin" && (
-              <button
-                className="bg-[#22CCED] h-[55px] rounded-[6px] font-semibold"
-                onClick={() => {
-                  router.push(buttonLink);
-                }}
-              >
-                {buttonCta}
-              </button>
-            )}
 
-            <CTABTN width="w-full" route="/sign-out" CTA="Sign Out" />
+          <div className="flex flex-col md:hidden   gap-4">
+            <div className="xsm:hidden mb-14">
+              <UserAvatar />
+            </div>
+            <CTABTN width="w-full h-[54px]" route="/sign-out" CTA="Sign Out" />
           </div>
         </section>
       }

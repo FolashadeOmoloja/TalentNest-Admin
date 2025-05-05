@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { validationRules } from "@/utilities/constants";
 import { useLoginAdmin } from "@/hooks/admin-login-hook";
-import Logo from "../Logo";
+import Logo from "../Elements/Logo";
 
 const LoginForm = () => {
   const {

@@ -1,54 +1,55 @@
+"use client";
+import { BsChatSquareTextFill } from "react-icons/bs";
 import DashboardMainNavbar from "./MainNav";
 import DashboardMobileNav from "./MobileNav";
+import { MdLogout, MdNotifications } from "react-icons/md";
+import { GiNestEggs } from "react-icons/gi";
+import { FaQuestionCircle } from "react-icons/fa";
+import { FaUserShield } from "react-icons/fa6";
+import { useSelector } from "react-redux";
 
-const NavLinks = [
-  {
-    navItem: "Dashboard",
-    href: "/control-room",
-  },
-  {
-    navItem: "Blog",
-    href: "/control-room/manage-blogs",
-  },
-  {
-    navItem: "Reviews",
-    href: "/control-room/manage-reviews",
-  },
-  {
-    navItem: "Faqs",
-    href: "/control-room/manage-faqs",
-  },
-];
+const DashboardNavbar = () => {
+  const { user } = useSelector((store: any) => store.auth);
+  const NavLinks = [
+    {
+      id: "Blog",
+      navItem: <BsChatSquareTextFill />,
+      href: "/control-room/manage-blogs",
+    },
+    {
+      id: "TalentNest Experiences",
+      navItem: <GiNestEggs />,
+      href: "/control-room/manage-reviews",
+    },
+    {
+      id: "Faqs",
+      navItem: <FaQuestionCircle />,
+      href: "/control-room/manage-faqs",
+    },
+    {
+      id: "Notifications",
+      navItem: <MdNotifications />,
+      href: "/control-room/notifications",
+    },
+    {
+      id: "Sign Out",
+      navItem: <MdLogout />,
+      href: "/sign-out",
+    },
+  ];
 
-const DropDown = [
-  {
-    navItem: "Notifications",
-    icon: "/images/dashboard/icon1.svg",
-    href: "/control-room/notifications",
-  },
-  {
-    navItem: "Sign Out",
-    icon: "/images/dashboard/icon2.svg",
-    href: "/sign-out",
-  },
-];
+  if (user?.accountRole === "SuperAdmin") {
+    NavLinks.splice(NavLinks.length - 1, 0, {
+      id: "Manage Admins",
+      navItem: <FaUserShield />,
+      href: "/control-room/manage-admins",
+    });
+  }
 
-const DashboardNavbar = ({ activeItem }: { activeItem?: number }) => {
   return (
     <>
-      <DashboardMainNavbar
-        activeItem={activeItem}
-        NavLinks={NavLinks}
-        buttonLink="/control-room/manage-admins"
-        buttonCta="Manage Admin"
-        DropDown={DropDown}
-      />
-      <DashboardMobileNav
-        NavLinks={NavLinks}
-        buttonLink="/control-room/manage-admins"
-        buttonCta="Manage Admin"
-        DropDown={DropDown}
-      />
+      <DashboardMainNavbar NavLinks={NavLinks} />
+      <DashboardMobileNav NavLinks={NavLinks} />
     </>
   );
 };

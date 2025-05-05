@@ -1,4 +1,4 @@
-import Logo from "@/components/Logo";
+import Logo from "@/components/Elements/Logo";
 
 const loading = () => (
   <section className="min-h-screen flex items-center justify-center bg-gradient-to-r from-[#EAEEFE] via-[#EAEEFE]  to-[#183dc23d]">

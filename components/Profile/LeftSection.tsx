@@ -18,12 +18,12 @@ const LeftSection = ({ user }: { user: userObject }) => {
         <span className="font-semibold text-3xl mt-8">
           {user.firstName} {user.lastName}
         </span>
-        <span className="font-bold text-[#7C8698] mt-6">{user.profession}</span>
-        <span className="font-bold text-[#7C8698] mt-6">
+        <span className="font-bold text-gray-500 mt-6">{user.profession}</span>
+        <span className="font-bold text-gray-500 mt-6">
           {" "}
           Profile status: {user.accountStatus}
         </span>
-        <span className="font-bold text-[#7C8698] mt-6">
+        <span className="font-bold text-gray-500 mt-6">
           {user.location}, {user.country}
         </span>
         {user.accountStatus == "Waitlist" ? (
@@ -55,7 +55,7 @@ const LeftSection = ({ user }: { user: userObject }) => {
         <span className="text-[#0A66C2] text-3xl">
           <FaLinkedin />
         </span>
-        <span className="text-sm text-[#7C8698] font-semibold text-wrap">
+        <span className="text-sm text-gray-500 font-semibold text-wrap">
           {user.linkedInUrl}
         </span>
       </div>
@@ -71,10 +71,10 @@ export const HireLeftSection = ({ user }: { user: userCompanyObject }) => {
       <div className="bg-white rounded-md h-[680px] flex flex-col px-4 centered ">
         <ProfilePhotoHandler user={user} talent={false} />
         <span className="font-semibold text-3xl mt-8">{user?.companyName}</span>
-        <span className="font-bold text-[#7C8698] mt-6">
+        <span className="font-bold text-gray-500 mt-6">
           {user?.industry.join(",")}
         </span>
-        <span className="font-bold text-[#7C8698] mt-6">
+        <span className="font-bold text-gray-500 mt-6">
           {user?.location}, {user?.country}
         </span>
         <div className="py-4 px-6 centered bg-[#010D3E] text-white rounded-md font-semibold mt-11">
@@ -85,7 +85,7 @@ export const HireLeftSection = ({ user }: { user: userCompanyObject }) => {
         <span className="text-[#0A66C2] text-3xl">
           <FaLinkedin />
         </span>
-        <span className="text-sm text-[#7C8698] font-semibold">
+        <span className="text-sm text-gray-500 font-semibold">
           {user?.linkedInUrl}
         </span>
       </div>

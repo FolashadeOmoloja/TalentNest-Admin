@@ -7,8 +7,6 @@ export async function middleware(req: NextRequest) {
   const url = req.nextUrl.pathname;
   const isAdminRoute = url.startsWith("/control-room");
 
-  console.log("Token:", token);
-
   // Check if the user is on the root route ("/")
   if (url === "/") {
     // If token exists, redirect to control-room

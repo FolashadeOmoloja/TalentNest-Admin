@@ -32,7 +32,7 @@ export const talentsColumn: Column<userObject>[] = [
     Cell: ({ row }: { row: { original: userObject } }) => {
       return (
         <div className="flex flex-col gap-4 ">
-          <span className="max-slg:text-lg">
+          <span className="max-slg:text-lg text-[#010D3E]">
             {row.original.firstName} {row.original.lastName}
           </span>
           <span className="text-base font-semibold">
@@ -120,7 +120,7 @@ export const talentsColumn: Column<userObject>[] = [
           func={() => ManageProfile(row.index, row.original)}
           CTA="Manage"
           height2="h-[50px] text-sm"
-          backGround="bg-[#22CCED]"
+          backGround="bg-[#010D3E]"
         />
       );
     },
@@ -134,7 +134,9 @@ export const companyColumn: Column<userCompanyObject>[] = [
     Cell: ({ row }: { row: { original: userCompanyObject } }) => {
       return (
         <div className="flex flex-col gap-4 ">
-          <span className="max-slg:text-lg">{row.original.companyName}</span>
+          <span className="max-slg:text-lg text-[#010D3E]">
+            {row.original.companyName}
+          </span>
         </div>
       );
     },
@@ -217,7 +219,7 @@ export const companyColumn: Column<userCompanyObject>[] = [
           func={() => ManageProfile(row.index, row.original)}
           CTA="Manage"
           height2="h-[50px] text-sm"
-          backGround="bg-[#22CCED]"
+          backGround="bg-[#010D3E]"
         />
       );
     },
@@ -265,7 +267,9 @@ export const companyActiveColumns: Column<JobPosted>[] = [
       );
       return (
         <div className="flex flex-col gap-4">
-          <span>{row.original.title}</span>
+          <span className="text-[#010D3E] font-medium">
+            {row.original.title}
+          </span>
           <span>{postDate}</span>
         </div>
       );
@@ -314,7 +318,7 @@ export const companyActiveColumns: Column<JobPosted>[] = [
           func={() => viewJob(row.original, row.index)}
           CTA="View Job"
           height2="h-[50px] text-sm"
-          backGround="bg-[#22CCED]"
+          backGround="bg-[#010D3E]"
         />
       );
     },
@@ -362,7 +366,9 @@ export const closedJobsColumns: Column<JobPosted>[] = [
       );
       return (
         <div className="flex flex-col gap-4">
-          <span>{row.original.title}</span>
+          <span className="text-[#010D3E] font-medium">
+            {row.original.title}
+          </span>
           <span>{postDate}</span>
         </div>
       );
@@ -413,7 +419,7 @@ export const closedJobsColumns: Column<JobPosted>[] = [
           func={() => viewJob(row.original, row.original._id)}
           CTA="Delete Job"
           height2="h-[50px] text-sm"
-          backGround="bg-[#22CCED]"
+          backGround="bg-red-700 hover:bg-red-800"
         />
       );
     },
@@ -430,7 +436,9 @@ export const singleCompanyColumns: Column<JobPosted>[] = [
       );
       return (
         <div className="flex flex-col gap-4">
-          <span>{row.original.title}</span>
+          <span className="text-[#010D3E] font-medium">
+            {row.original.title}
+          </span>
           <span className="font-normal text-base">{postDate}</span>
         </div>
       );
@@ -479,7 +487,7 @@ export const singleCompanyColumns: Column<JobPosted>[] = [
           func={() => viewJob(row.original, row.index)}
           CTA="View Job"
           height2="h-[50px] text-sm"
-          backGround="bg-[#22CCED]"
+          backGround="bg-[#010D3E]"
         />
       );
     },
@@ -496,7 +504,9 @@ export const singleCompClosedJobsColumns: Column<JobPosted>[] = [
       );
       return (
         <div className="flex flex-col gap-4">
-          <span>{row.original.title}</span>
+          <span className="text-[#010D3E] font-medium">
+            {row.original.title}
+          </span>
           <span className="font-normal text-base">{postDate}</span>
         </div>
       );
@@ -561,7 +571,7 @@ export const singleCompClosedJobsColumns: Column<JobPosted>[] = [
           func={() => viewJob(row.original, row.original._id)}
           CTA="Delete Job"
           height2="h-[50px] text-sm"
-          backGround="bg-[#22CCED]"
+          backGround="bg-[#010D3E]"
         />
       );
     },
@@ -586,7 +596,9 @@ export const successHireColumns: Column<SuccessApplications>[] = [
     Cell: ({ row }: { row: { original: SuccessApplications } }) => {
       return (
         <div className="flex flex-col gap-2">
-          <span>{row.original.job.title}</span>
+          <span className="text-[#010D3E] font-medium">
+            {row.original.job.title}
+          </span>
           <div className="flex flex-col gap-4 text-base">
             <span>{row.original.job.company.companyName}</span>
             <span>
@@ -680,10 +692,10 @@ export const blogPostColumns: Column<BlogPosts>[] = [
       );
       return (
         <div className="flex flex-col gap-4">
-          <span>{row.original.title}</span>
+          <span style={{ color: "#010d3e" }}>{row.original.title}</span>
           <div className="flex flex-col gap-2 text-base">
             <span>{row.original.author}</span>
-            <p>
+            <p className="text-sm ">
               <span className="font-semibold">Created: </span>
               {postDate}
             </p>
@@ -711,7 +723,7 @@ export const blogPostColumns: Column<BlogPosts>[] = [
           func={() => editBlog(row.original._id, row.original)}
           CTA="Edit"
           height2="h-[50px] text-sm"
-          backGround="bg-[#22CCED]"
+          backGround="bg-[#010D3E]"
         />
       );
     },
@@ -725,12 +737,14 @@ export const reviewColumns: Column<Reviews>[] = [
     Cell: ({ row }: { row: { original: Reviews } }) => {
       const postDate = formatTimeDifference(row.original.createdAt);
       return (
-        <div className="flex flex-col gap-4">
-          <span>{row.original.review}</span>
+        <div className="flex flex-col gap-4 mb-3 mt-3">
+          <span style={{ color: "#010d3e", maxWidth: "700px" }}>
+            {row.original.review}
+          </span>
           <div className="flex flex-col gap-2 text-base">
             <span>{row.original.fullname}</span>
             <span>{row.original.role}</span>
-            <p>
+            <p className="text-sm ">
               <span className="font-semibold">Created: </span>
               {postDate}
             </p>
@@ -758,7 +772,7 @@ export const reviewColumns: Column<Reviews>[] = [
           func={() => editReview(row.original._id, row.original)}
           CTA="Edit"
           height2="h-[50px] text-sm"
-          backGround="bg-[#22CCED]"
+          backGround="bg-[#010D3E]"
         />
       );
     },
@@ -771,11 +785,13 @@ export const faqColumns: Column<Faqs>[] = [
     Cell: ({ row }: { row: { original: Faqs } }) => {
       const postDate = formatTimeDifference(row.original.createdAt);
       return (
-        <div className="flex flex-col gap-4 text-base">
-          <span>Q: {row.original.question}</span>
-          <div className="font-normal ">
-            <span>A: {row.original.answer}</span>
-            <p>
+        <div className="flex flex-col gap-4 text-base mb-3 mt-3">
+          <span style={{ color: "#010d3e" }}>Q: {row.original.question}</span>
+          <div className="font-normal">
+            <p className="mb-5" style={{ maxWidth: "700px" }}>
+              A: {row.original.answer}
+            </p>
+            <p className="text-sm">
               <span className="font-semibold">Created: </span>
               {postDate}
             </p>
@@ -803,7 +819,7 @@ export const faqColumns: Column<Faqs>[] = [
           func={() => editFaq(row.original._id, row.original)}
           CTA="Edit"
           height2="h-[50px] text-sm"
-          backGround="bg-[#22CCED]"
+          backGround="bg-[#010D3E]"
         />
       );
     },
@@ -817,7 +833,7 @@ export const adminColumn: Column<Admin>[] = [
     Cell: ({ row }: { row: { original: Admin } }) => {
       return (
         <div className="flex flex-col gap-4 ">
-          <span className="max-slg:text-lg">
+          <span className="max-slg:text-lg" style={{ color: "#010D3E" }}>
             {row.original.firstName} {row.original.lastName}
           </span>
           <span className="text-base font-semibold">
@@ -831,7 +847,11 @@ export const adminColumn: Column<Admin>[] = [
     Header: "",
     accessor: "accountRole",
     Cell: ({ row }: { row: { original: Admin } }) => {
-      return <span>{row.original.accountRole}</span>;
+      return (
+        <span className="font-semibold text-[#010D3E]">
+          {row.original.accountRole}
+        </span>
+      );
     },
   },
   {
@@ -853,7 +873,7 @@ export const adminColumn: Column<Admin>[] = [
           func={() => updateAdmin(row.original._id, row.original)}
           CTA="Update"
           height2="h-[50px] text-sm"
-          backGround="bg-[#22CCED]"
+          backGround="bg-[#010D3E]"
         />
       );
     },

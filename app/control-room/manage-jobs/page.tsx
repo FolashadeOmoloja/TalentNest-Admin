@@ -4,7 +4,7 @@ import DashboardNavbar from "@/components/Navbar/Navbar";
 const ManageTalents = () => {
   return (
     <>
-      <DashboardNavbar activeItem={0} />
+      <DashboardNavbar />
       <JobTable />
     </>
   );

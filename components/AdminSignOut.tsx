@@ -1,5 +1,4 @@
 "use client";
-import FormLogo from "@/components/Elements/FormLogo";
 import { useRouter } from "next/navigation";
 import { setLoading, setUser } from "@/redux/slices/authSlice";
 import axios from "axios";
@@ -7,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { ADMIN_API_END_POINT } from "@/utilities/constants/constants";
-import Logo from "./Logo";
+import Logo from "./Elements/Logo";
 
 const AdminSignOut = () => {
   const router = useRouter();

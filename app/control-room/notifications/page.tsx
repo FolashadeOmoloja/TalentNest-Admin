@@ -16,7 +16,7 @@ const SettingsPage = () => {
 
   return (
     <>
-      <DashboardNavbar activeItem={0} />
+      <DashboardNavbar />
       <Notifications
         notifications={notification}
         loading={loading}

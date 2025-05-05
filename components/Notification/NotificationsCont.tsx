@@ -33,8 +33,8 @@ const Notifications = ({
 
   return (
     <section className="dashboard-container min-h-svh">
-      <h2 className="text-2xl font-bold mb-1">
-        Keep track of TalentNest notifications
+      <h2 className="text-2xl font-bold mb-1 bg-text">
+        Keep track of Frack notifications
       </h2>
       <p className="text-gray-600 text-sm mb-4">
         Note: Deleting notifications here will also remove them from the
