@@ -21,7 +21,9 @@ const SuccessHireTable = () => {
         <FaArrowLeft />
         <span>Go back</span>
       </div>
-      <h2 className="text-2xl font-bold mb-1">Successful Job Placements</h2>
+      <h2 className="text-2xl font-bold mb-1 bg-text">
+        Successful Job Placements
+      </h2>
       <span className="text-gray-500">Summary of completed hires</span>
       <div className="flex w-full text-[#010D3E] md:text-lg font-bold mt-16 border-b-[3px] border-[#010D3E]">
         <span className={`tab active max-sm:h-[50px]`}>

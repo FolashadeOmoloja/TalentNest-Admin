@@ -56,7 +56,7 @@ const FilterTable = () => {
         <FaArrowLeft />
         <span>Go back</span>
       </div>
-      <h2 className="text-2xl font-bold mb-1">
+      <h2 className="text-2xl font-bold mb-1 bg-text">
         Manage Dropdowns and job filters
       </h2>
       <div className="flex w-full text-[#626263] md:text-lg font-bold mt-16 border-b border-[#CCD2D9]">

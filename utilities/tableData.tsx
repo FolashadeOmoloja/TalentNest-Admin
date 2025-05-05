@@ -595,7 +595,7 @@ export const successHireColumns: Column<SuccessApplications>[] = [
     accessor: "job",
     Cell: ({ row }: { row: { original: SuccessApplications } }) => {
       return (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 mt-4 mb-4">
           <span className="text-[#010D3E] font-medium">
             {row.original.job.title}
           </span>
