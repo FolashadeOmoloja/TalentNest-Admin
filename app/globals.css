@@ -1,0 +1,152 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@layer components {
+  .navItem {
+    @apply fixed  top-[96px] left-0 bottom-0 px-9 py-5 max-sm:px-4  transform transition-transform duration-700 ease-in-out bg-white z-30 w-full;
+  }
+
+  .section-container {
+    @apply px-[100px] max-xlg:px-[50px] max-lg:px-9 max-sm:px-4 relative max-lg:top-[96px] mt-[151px] max-slg:mt-[50px];
+  }
+
+  .bg-text {
+    @apply bg-gradient-to-b from-black  to-[#001E80] text-transparent bg-clip-text;
+  }
+
+  .bg-text-r {
+    @apply bg-gradient-to-r from-black  to-[#001E80] text-transparent bg-clip-text;
+  }
+
+  .form-btn {
+    @apply w-full h-12 bg-black text-white shadow-sm rounded-lg hover:shadow-xl hover:bg-[#141414] transition-all duration-300;
+  }
+
+  .dropdown-button {
+    @apply bg-white border border-black cursor-pointer outline-none focus:border-[#010D3E]  text-gray-600;
+  }
+
+  .dropdown-menu {
+    @apply absolute mt-4 bg-white shadow-lg rounded z-10 w-full overflow-y-auto max-h-[300px];
+  }
+
+  .dropdown-item {
+    @apply px-4 py-2 cursor-pointer hover:bg-[#010D3E15];
+  }
+
+  .formdivs label {
+    @apply text-sm font-semibold;
+  }
+
+  .formdivs input,
+  .formdivs textarea {
+    @apply rounded-lg border border-gray-200 w-full p-3 outline-none focus:border-[#010D3E] placeholder:text-sm placeholder:text-gray-400;
+  }
+
+  .formdivs .input {
+    @apply focus:border-gray-200;
+  }
+
+  .login-btn {
+    @apply w-full h-12 bg-[#010D3E] text-white shadow-sm rounded-lg hover:shadow-xl hover:bg-[#001354] transition-all duration-300;
+  }
+  .btn-hover {
+    @apply hover:shadow-xl hover:bg-[#001354] transition-all duration-300;
+  }
+
+  .dashboard-container {
+    @apply relative top-24 py-20 px-[100px] max-xlg:px-[50px] max-xlg:py-[50px] max-sm:px-4;
+  }
+
+  .notice-div a {
+    @apply text-[#010D3E] font-semibold;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.button-container:hover .icon-animate,
+.link-animate:hover .icon-animate {
+  animation: slideIn 0.5s ease-out forwards;
+  opacity: 1;
+}
+
+.tab {
+  position: relative;
+  width: 212px;
+  height: 33px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.tab::before {
+  content: "";
+  position: absolute;
+  bottom: -3px; /* Adjust according to your needs */
+  left: 50%;
+  width: 0;
+  height: 3px; /* Border height */
+  background-color: #010d3e;
+  transition: all 0.3s ease-in-out;
+  transform: translateX(-50%);
+}
+
+.tab.active {
+  color: #010d3e;
+}
+
+.tab.active::before {
+  width: 100%;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+  }
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+}
