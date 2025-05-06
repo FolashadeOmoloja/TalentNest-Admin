@@ -22,17 +22,17 @@ export const useLoginAdmin = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          withCredentials: true,
+          withCredentials: true, // Send `httpOnly` token if it exists
         }
       );
 
       const { success, message, admin } = response.data;
       if (success) {
-        // Store the 'Set-Cookie' header manually if necessary
-        const setCookieHeader = response.headers["set-cookie"];
-        if (setCookieHeader) {
-          Cookies.set("token", setCookieHeader[0]);
-        }
+        Cookies.set("accessToken", "admin", {
+          expiresIn: "1d",
+          secure: true,
+          sameSite: "None",
+        });
 
         // Set the user data in Redux
         dispatch(setUser(admin));

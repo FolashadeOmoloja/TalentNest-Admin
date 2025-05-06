@@ -1,10 +1,8 @@
 "use client";
 
-import { useGetAllCompanyEmployed } from "@/hooks/application-hook";
-import { useGetCompanyJobs } from "@/hooks/jobPosts-hook";
+import { useFetchCompanyPercentage } from "@/hooks/jobPosts-hook";
 import { userCompanyObject, userObject } from "@/utilities/typeDefs";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 
 const ProgressCircle = ({
   company,
@@ -15,32 +13,13 @@ const ProgressCircle = ({
 }) => {
   const [toogleOnTop, setToogleOnTop] = useState(false);
   const [toogleOnBottom, setToogleOnBottom] = useState(true);
-  const [text, setText] = useState(company ? "Active Jobs" : "");
+  const [text, setText] = useState(company ? "Successful Hires" : "");
   const [fetchedCompany, setFetchedCompany] = useState("");
-  const { companyJobs: jobs } = useSelector((store: any) => store.companyJobs);
-  const { successApplicants } = useSelector(
-    (store: any) => store.successApplicants
+  const { jobPercentage, hiresPercentage } = useFetchCompanyPercentage(
+    (user as userCompanyObject)?._id
   );
 
-  const activeJobs = jobs.filter((job: { status: string }) =>
-    job.status?.toLowerCase().includes("open")
-  );
-
-  const { fetchJobs } = useGetCompanyJobs();
-  const { fetchApplicants } = useGetAllCompanyEmployed();
-
-  const jobPercentage = (activeJobs.length / jobs.length) * 100;
-  const hiresPercentage = (successApplicants.length / jobs.length) * 100;
   const [percentage, setPercentage] = useState(company ? jobPercentage : 0);
-  //fetches data and calculates the percentage
-  useEffect(() => {
-    if (company) {
-      fetchApplicants((user as userCompanyObject)?._id);
-      fetchJobs((user as userCompanyObject)?._id);
-      setFetchedCompany((user as userCompanyObject)?._id);
-    }
-  }, [user]);
-
   useEffect(() => {
     if (company) {
       setPercentage(toogleOnTop ? jobPercentage : hiresPercentage);

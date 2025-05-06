@@ -81,30 +81,56 @@ export const useGetCompanyJobs = () => {
   return { fetchJobs, loading };
 };
 
-export const useGetAllCompanyEmployed = () => {
-  const dispatch = useDispatch();
-  const fetchApplicants = async (id: any) => {
-    try {
-      const response = await axios.get(
-        `${APPLICATION_API_END_POINT}/get-company-hired-applicants/${id}`,
-        {
-          withCredentials: true,
-        }
-      );
-      // dispatch(setSuccessApplicants(response.data.employed));
-      console.log(response.data.employed);
-    } catch (error: any) {
-      const errorMessage =
-        error.response?.data?.message ||
-        error.message ||
-        "Failed to fetch talents";
-    }
-  };
+export const useFetchCompanyPercentage = (companyId: string) => {
+  const [jobPercentage, setJobPercentage] = useState<number>(0);
+  const [hiresPercentage, setHiresPercentage] = useState<number>(0);
 
-  return { fetchApplicants };
+  useEffect(() => {
+    const fetchCompanyData = async () => {
+      try {
+        const [jobsResponse, employedResponse] = await Promise.all([
+          axios.get(`${JOB_API_END_POINT}/getSingleCompanyJobs/${companyId}`, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+            withCredentials: true,
+          }),
+          axios.get(
+            `${APPLICATION_API_END_POINT}/get-company-hired-applicants/${companyId}`,
+            {
+              withCredentials: true,
+            }
+          ),
+        ]);
+
+        const jobs = jobsResponse.data.jobs || [];
+        const employed = employedResponse.data.employed || [];
+
+        const activeJobs = jobs.filter((job: { status: string }) =>
+          job.status?.toLowerCase().includes("open")
+        );
+
+        const jobPercent =
+          jobs.length > 0 ? (activeJobs.length / jobs.length) * 100 : 0;
+        const hirePercent =
+          jobs.length > 0 ? (employed.length / jobs.length) * 100 : 0;
+
+        setJobPercentage(jobPercent);
+        setHiresPercentage(hirePercent);
+      } catch (error: any) {
+        const errorMessage =
+          error.response?.data?.message ||
+          error.message ||
+          "Error fetching company data";
+        toast.error(errorMessage);
+      }
+    };
+
+    if (companyId) fetchCompanyData();
+  }, [companyId]);
+
+  return { jobPercentage, hiresPercentage };
 };
-
-export const useGetCompanyPercentageData = () => {};
 
 export const useDeleteCompanyJob = () => {
   const { loading } = useSelector((store: any) => store.auth);
