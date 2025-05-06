@@ -17,7 +17,7 @@ const DashboardLayout = ({
   return (
     <section className="dashboard-container flex gap-10 max-md:flex-col">
       <section className="bg-white pt-14 px-9 max-sm:px-[10px] pb-20 rounded-md md:basis-[75%]">
-        <h2 className="text-2xl font-bold mb-1">
+        <h2 className="text-2xl font-bold mb-1 bg-text">
           TalentNest Statistics Overview
         </h2>
         <span className="text-gray-500 ">{dashInfo}</span>

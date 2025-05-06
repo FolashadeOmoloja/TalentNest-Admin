@@ -1,4 +1,7 @@
-import { JOB_API_END_POINT } from "@/utilities/constants/constants";
+import {
+  APPLICATION_API_END_POINT,
+  JOB_API_END_POINT,
+} from "@/utilities/constants/constants";
 import { setLoading } from "@/redux/slices/authSlice";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -77,6 +80,31 @@ export const useGetCompanyJobs = () => {
 
   return { fetchJobs, loading };
 };
+
+export const useGetAllCompanyEmployed = () => {
+  const dispatch = useDispatch();
+  const fetchApplicants = async (id: any) => {
+    try {
+      const response = await axios.get(
+        `${APPLICATION_API_END_POINT}/get-company-hired-applicants/${id}`,
+        {
+          withCredentials: true,
+        }
+      );
+      // dispatch(setSuccessApplicants(response.data.employed));
+      console.log(response.data.employed);
+    } catch (error: any) {
+      const errorMessage =
+        error.response?.data?.message ||
+        error.message ||
+        "Failed to fetch talents";
+    }
+  };
+
+  return { fetchApplicants };
+};
+
+export const useGetCompanyPercentageData = () => {};
 
 export const useDeleteCompanyJob = () => {
   const { loading } = useSelector((store: any) => store.auth);

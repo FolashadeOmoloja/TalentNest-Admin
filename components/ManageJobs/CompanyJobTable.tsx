@@ -23,7 +23,7 @@ const CompanyJobTable = () => {
   const { successApplicants } = useSelector(
     (store: any) => store.successApplicants
   );
-  console.log("H", successApplicants);
+
   const { loading } = useSelector((store: any) => store.auth);
   const [active, setActive] = useState<IsActiveState>({ 0: true });
   const [changeTable, setChangeTable] = useState(0);

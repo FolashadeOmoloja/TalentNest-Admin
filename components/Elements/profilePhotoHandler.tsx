@@ -11,7 +11,7 @@ interface ProfilePhotoProps {
 
 const ProfilePhotoHandler: React.FC<ProfilePhotoProps> = ({ user, talent }) => {
   return (
-    <div className="h-[200px] w-[200px] rounded-full overflow-hidden border border-[#010D3E]">
+    <div className="h-[200px] w-[200px] rounded-full overflow-hidden border-4 border-[#010D3E]">
       {user?.profileImage ? (
         <img
           src={user?.profileImage}

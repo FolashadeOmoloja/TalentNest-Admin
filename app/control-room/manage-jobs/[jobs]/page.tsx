@@ -8,7 +8,7 @@ const page = ({ params }: { params: { myJobsId: string } }) => {
   const { job } = useSelector((store: any) => store.job);
   return (
     <>
-      <DashboardNavbar activeItem={0} />
+      <DashboardNavbar />
       <JobPost jobData={job} />
     </>
   );

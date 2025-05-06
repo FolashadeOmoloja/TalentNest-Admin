@@ -128,7 +128,7 @@ const ProfileDetails = <T extends boolean>({
   return (
     <section className="basis-[70%]">
       <section
-        className={`bg-white rounded-md  lg:h-full p-9 max-slg:p-7 max-sm:px-4 transition duration-500`}
+        className={`bg-white rounded-2xl shadow-md  lg:h-full p-9 max-slg:p-7 max-sm:px-4 transition duration-500`}
       >
         {skillsBool ? (
           <section>
@@ -186,7 +186,7 @@ const ProfileDetails = <T extends boolean>({
                     hidden download link
                   </a>
                   <button
-                    className="py-4 px-9 bg-[#22CCED] text-white rounded-md font-semibold mt-6 btn-hover hover:bg-[#22cbedb2] max-w-[180px]"
+                    className="py-4 px-9 bg-[#001E80] text-white rounded-md font-semibold mt-6  max-w-[180px]"
                     onClick={openCalendly}
                   >
                     Schedule
@@ -301,7 +301,7 @@ const ProfileDetails = <T extends boolean>({
             />
             <ProfileBox title={"Work Culture"} details={user?.preference} />
             <button
-              className="py-4 px-6 bg-[#22CCED] text-white rounded-md font-semibold mt-14 btn-hover hover:bg-[#22cbedb2]"
+              className="py-4 px-6 bg-[#001E80] text-white rounded-md font-semibold mt-14 "
               onClick={viewJobs}
             >
               {loading ? (
@@ -335,7 +335,7 @@ const ProfileDetails = <T extends boolean>({
                     hidden download link
                   </a>
                   <button
-                    className="py-4 px-9 bg-[#22CCED] text-white rounded-md font-semibold mt-6 btn-hover hover:bg-[#22cbedb2] max-w-[180px]"
+                    className="py-4 px-9 bg-[#001E80] text-white rounded-md font-semibold mt-6  max-w-[180px]"
                     onClick={openCalendly}
                   >
                     Schedule

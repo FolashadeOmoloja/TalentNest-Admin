@@ -44,7 +44,7 @@ const FilterBox: React.FC<FilterBoxProps> = ({
   };
 
   return (
-    <section className="bg-white rounded-md mt-10 p-9 max-slg:p-7 max-sm:px-4">
+    <section className="bg-white rounded-2xl shadow-md mt-10 p-9 max-slg:p-7 max-sm:px-4">
       <div className="flex justify-between text-[#010D3E] font-bold text-lg relative">
         <form onSubmit={handleSubmit(handleUpdateFilter)}>
           <div className="flex gap-3 formdivs mt-4">

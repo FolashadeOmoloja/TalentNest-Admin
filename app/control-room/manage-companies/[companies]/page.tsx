@@ -8,7 +8,7 @@ const page = ({ params }: { params: { myJobsId: string } }) => {
   const { company } = useSelector((store: any) => store.company);
   return (
     <>
-      <DashboardNavbar activeItem={0} />
+      <DashboardNavbar />
       <CompanyProfile user={company} />
     </>
   );

@@ -113,7 +113,7 @@ const page = () => {
   ];
   return (
     <>
-      <DashboardNavbar activeItem={0} />
+      <DashboardNavbar />
       <DashboardLayout
         dashInfo="This provides a summary of your TalentNest details"
         analytics={companyAnalytics}

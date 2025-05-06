@@ -59,12 +59,9 @@ const EditReviewBox = () => {
         <FaArrowLeft />
         <span>Go back</span>
       </div>
-      <h2 className="text-2xl font-bold mb-1">Edit Review</h2>
+      <h2 className="text-2xl font-bold mb-1 bg-text">Edit Review</h2>
       <section className="flex justify-center w-full">
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="bg-white rounded-sm md:w-[70%] py-8 md:px-16 sm:px-6 px-4 mt-16 max-sm:mt-10 max-sm:py-6"
-        >
+        <form onSubmit={handleSubmit(onSubmit)} className="form-container">
           <div className="flex   md:text-lg font-bold mt-16  justify-center">
             <span
               className={`tab active max-sm:h-[50px] text-xl w-full xsm:w-[200px]`}
@@ -72,7 +69,9 @@ const EditReviewBox = () => {
               Review Details
             </span>
           </div>
-          <p className="text-gray-500 text-lg mt-9">Fill the form below</p>
+          <p className=" text-[#010D3E] text-xl font-medium mt-9">
+            Fill the form below
+          </p>
           <section className="mt-8">
             <div className="flex formdivs flex-col mb-4 sm:mb-5 gap-[6px]">
               <label>
@@ -127,7 +126,7 @@ const EditReviewBox = () => {
             <div className="mt-20 flex gap-10 max-xsm:gap-5">
               <button
                 type="submit"
-                className="w-full h-12 bg-[#010D3E] text-white shadow-sm rounded-lg btn-hover"
+                className="login-btn"
                 disabled={isSubmitting}
               >
                 {loading ? (
@@ -139,10 +138,7 @@ const EditReviewBox = () => {
                   "Edit Review"
                 )}
               </button>
-              <div
-                className="login-btn centered gap-3 cursor-pointer icon-animate"
-                onClick={DeleteRev}
-              >
+              <div className="form-btn centered" onClick={DeleteRev}>
                 {loading ? (
                   <div className="flex items-center justify-center">
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />

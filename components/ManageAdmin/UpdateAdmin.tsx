@@ -56,13 +56,12 @@ const UpdateAdminBox = () => {
         <FaArrowLeft />
         <span>Go back</span>
       </div>
-      <h2 className="text-2xl font-bold mb-1">Update Admin</h2>
+      <h2 className="text-2xl font-bold mb-1 bg-text">Update Admin</h2>
       <section className="flex justify-center w-full">
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="bg-white rounded-sm md:w-[70%] py-8 md:px-16 sm:px-6 px-4 mt-16 max-sm:mt-10 max-sm:py-6"
-        >
-          <div className="text-gray-500 text-lg mb-8">Fill the form below</div>
+        <form onSubmit={handleSubmit(onSubmit)} className="form-container">
+          <div className="text-[#010D3E] text-xl font-medium mb-8">
+            Fill the form below
+          </div>
           <div className="flex formdivs mb-[20px] gap-[20px]">
             {/* First Name */}
             <div className="basis-1/2">

@@ -52,7 +52,7 @@ const ApplicationsTable = () => {
         <FaArrowLeft />
         <span>Go back</span>
       </div>
-      <h2 className="text-2xl font-bold mb-1">
+      <h2 className="text-2xl font-bold mb-1 bg-text">
         Manage Talent's Application for Job Post
       </h2>
       <div className="flex w-full text-[#626263] md:text-lg font-bold mt-16 mb-5 border-b border-[#CCD2D9]">
