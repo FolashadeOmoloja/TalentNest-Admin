@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { ADMIN_API_END_POINT } from "@/utilities/constants/constants";
 import Logo from "./Elements/Logo";
+import Cookies from "js-cookie";
 
 const AdminSignOut = () => {
   const router = useRouter();
@@ -15,12 +16,22 @@ const AdminSignOut = () => {
   const handleSignOut = async () => {
     try {
       dispatch(setLoading(true));
+
+      // Send logout request to backend, which clears the httpOnly `token` cookie
       const res = await axios.get(`${ADMIN_API_END_POINT}/logout`, {
         withCredentials: true,
       });
+
       if (res.data.success) {
+        // Clear `accessToken` from client-side cookies
+        Cookies.remove("accessToken");
+
+        // Clear user data in Redux
         dispatch(setUser(null));
+
+        // Redirect to the homepage
         router.push("/");
+
         toast.success(res.data.message);
       }
     } catch (error: any) {
