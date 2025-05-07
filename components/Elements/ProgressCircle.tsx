@@ -14,7 +14,6 @@ const ProgressCircle = ({
   const [toogleOnTop, setToogleOnTop] = useState(false);
   const [toogleOnBottom, setToogleOnBottom] = useState(true);
   const [text, setText] = useState(company ? "Successful Hires" : "");
-  const [fetchedCompany, setFetchedCompany] = useState("");
   const { jobPercentage, hiresPercentage } = useFetchCompanyPercentage(
     (user as userCompanyObject)?._id
   );
@@ -24,7 +23,7 @@ const ProgressCircle = ({
     if (company) {
       setPercentage(toogleOnTop ? jobPercentage : hiresPercentage);
     }
-  }, [toogleOnTop, fetchedCompany]);
+  }, [toogleOnTop, jobPercentage, hiresPercentage]);
   const toggleSwitchTop = () => {
     setToogleOnTop(!toogleOnTop);
     setToogleOnBottom(!toogleOnBottom);

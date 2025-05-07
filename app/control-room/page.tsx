@@ -103,11 +103,11 @@ const page = () => {
   ];
 
   const chartData = [
-    { name: "Jan", jobs: 3, talents: 2 },
-    { name: "Feb", jobs: 4, talents: 3 },
-    { name: "Mar", jobs: 5, talents: 4 },
-    { name: "Apr", jobs: 6, talents: 5 },
-    { name: "May", jobs: 7, talents: 6 },
+    { name: "Jan", jobs: 3, talents: 2, companies: 1 },
+    { name: "Feb", jobs: 4, talents: 3, companies: 2 },
+    { name: "Mar", jobs: 5, talents: 4, companies: 2 },
+    { name: "Apr", jobs: 6, talents: 5, companies: 3 },
+    { name: "May", jobs: 7, talents: 6, companies: 4 },
   ];
 
   return (
