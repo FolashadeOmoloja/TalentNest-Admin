@@ -33,7 +33,7 @@ const JobPost = ({ jobData }: { jobData: JobPosted }) => {
   return (
     <section className="section-container relative top-[96px] mt-[50px]  max-w-4xl lg:p-0 mx-auto space-y-8">
       <Link
-        href={"/dashboard/jobs"}
+        href={"/control-room/manage-jobs"}
         className="flex text-[#010d3e] hover:text-black gap-3 text-xl items-center font-bold"
       >
         <FaArrowLeft />
