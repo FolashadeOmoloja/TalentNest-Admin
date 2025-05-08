@@ -48,7 +48,12 @@ export const DownloadResumeBotton = ({ filename }: { filename: string }) => {
   };
   return (
     <div className="">
-      <a ref={linkRef} style={{ display: "none" }}>
+      <a
+        ref={linkRef}
+        style={{ display: "none" }}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         hidden download link
       </a>
       <button
