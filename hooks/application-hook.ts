@@ -29,7 +29,11 @@ export const useGetApplicants = () => {
       );
       if (response.data.success) {
         dispatch(setApplication(response.data.job.applicants));
-        router.push(`/control-room/manage-jobs/applications/${encodedId}`);
+        if (response.data.job.applicants.talent) {
+          router.push(`/control-room/manage-jobs/applications/${encodedId}`);
+        } else {
+          toast.error("No applicants found");
+        }
       } else {
         toast.error(response.data.message);
       }
