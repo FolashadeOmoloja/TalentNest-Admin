@@ -124,7 +124,7 @@ const ProfileDetails = <T extends boolean>({
       sanitizedMeetingUrl
     );
   };
-
+  console.log("resume:", (user as userObject)?.resume);
   return (
     <section className="basis-[70%]">
       <section
