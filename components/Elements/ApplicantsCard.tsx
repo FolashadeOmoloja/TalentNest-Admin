@@ -9,9 +9,9 @@ import { useDispatch } from "react-redux";
 const ApplicantsCard = ({ item, idx }: { item: Applicants; idx: number }) => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const encodedId = btoa(item.talent._id as string);
+  const encodedId = btoa(item?.talent._id as string);
   const visitProfile = () => {
-    dispatch(setTalent(item.talent));
+    dispatch(setTalent(item?.talent));
     router.push(`/control-room/manage-talents/${encodedId}`);
   };
   const [isDropdownVisible, setDropdownVisible] = useState(false);

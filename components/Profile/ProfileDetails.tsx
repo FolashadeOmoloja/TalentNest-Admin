@@ -166,112 +166,135 @@ const ProfileDetails = <T extends boolean>({
               title={"Primary Skills to offer"}
               details={`${(user as userObject)?.skills.join(",")} `}
             />
-            {!schedulePrompt ? (
-              <div>
-                <button
-                  className="py-4 px-6 bg-[#010D3E] text-white rounded-md font-semibold mt-6 btn-hover"
-                  onClick={() => setSchedulePrompt(true)}
-                >
-                  Schedule a Meeting
-                </button>
-                <span className="text-sm mt-3 w-full text-[#010D3E] font-semibold  italic block">
-                  (Schedule Meeting with talent and notify)
-                </span>
-              </div>
-            ) : (
-              <div>
-                <div className="flex lg:gap-5 gap-0 max-lg:flex-col ">
-                  <a ref={linkRef} style={{ display: "none" }} target="_blank">
-                    hidden download link
-                  </a>
-                  <button
-                    className="py-4 px-9 bg-[#001E80] text-white rounded-md font-semibold mt-6  max-w-[180px]"
-                    onClick={openCalendly}
-                  >
-                    Schedule
-                  </button>
-                  <button
-                    className="py-4 px-9 bg-[#010D3E] text-white rounded-md font-semibold mt-6 btn-hover max-w-[180px]"
-                    onClick={() => setNotifyPrompt(true)}
-                  >
-                    Notify
-                  </button>
-                  <button
-                    className="py-4 px-9 bg-[#010D3E] text-white rounded-md font-semibold mt-6 btn-hover max-w-[180px]"
-                    onClick={() => {
-                      setSchedulePrompt(false);
-                      setNotifyPrompt(false);
-                    }}
-                  >
-                    Cancel
-                  </button>
-                </div>
-                <span className="text-sm mt-3 w-full text-[#010D3E] font-semibold  italic block">
-                  (Schedule Meeting with talent and notify)
-                </span>
-              </div>
-            )}
-            {notifyPrompt && (
-              <form onSubmit={handleSubmit(onTalentSubmit)}>
-                <div className="flex gap-3 formdivs mt-4">
-                  <input
-                    type="url"
-                    placeholder="Enter calendly meeting link"
-                    {...register("meetingUrl", {
-                      required: validationRules.url.required,
-                      pattern: validationRules.url.pattern,
-                    })}
-                  />
-                  <button
-                    type="submit"
-                    className="basis-[20%] p-3 bg-[#010D3E] text-white shadow-sm rounded-lg btn-hover"
-                    disabled={isSubmitting}
-                  >
-                    {loading ? (
-                      <div className="flex items-center justify-center">
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        loading
+            <>
+              {job?.length > 0 ? (
+                <>
+                  {" "}
+                  {!schedulePrompt ? (
+                    <div>
+                      <button
+                        className="py-4 px-6 bg-[#010D3E] text-white rounded-md font-semibold mt-6 btn-hover"
+                        onClick={() => setSchedulePrompt(true)}
+                      >
+                        Schedule a Meeting
+                      </button>
+                      <span className="text-sm mt-3 w-full text-[#010D3E] font-semibold  italic block">
+                        (Schedule Meeting with talent and notify)
+                      </span>
+                    </div>
+                  ) : (
+                    <div>
+                      <div className="flex lg:gap-5 gap-0 max-lg:flex-col ">
+                        <a
+                          ref={linkRef}
+                          style={{ display: "none" }}
+                          target="_blank"
+                        >
+                          hidden download link
+                        </a>
+                        <button
+                          className="py-4 px-9 bg-[#001E80] text-white rounded-md font-semibold mt-6  max-w-[180px]"
+                          onClick={openCalendly}
+                        >
+                          Schedule
+                        </button>
+                        <button
+                          className="py-4 px-9 bg-[#010D3E] text-white rounded-md font-semibold mt-6 btn-hover max-w-[180px]"
+                          onClick={() => setNotifyPrompt(true)}
+                        >
+                          Notify
+                        </button>
+                        <button
+                          className="py-4 px-9 bg-[#010D3E] text-white rounded-md font-semibold mt-6 btn-hover max-w-[180px]"
+                          onClick={() => {
+                            setSchedulePrompt(false);
+                            setNotifyPrompt(false);
+                          }}
+                        >
+                          Cancel
+                        </button>
                       </div>
-                    ) : (
-                      "Notify"
-                    )}
-                  </button>
-                </div>
-              </form>
-            )}
-            {!deletePrompt ? (
-              <div>
-                <button
-                  className="py-4 px-6 bg-red-700 text-white rounded-md font-semibold mt-14 btn-hover hover:bg-red-800"
-                  onClick={() => setDeletePrompt(true)}
-                >
-                  Delete Talent Profile
-                </button>
-                <span className="text-sm mt-3 w-full text-[#010D3E] font-semibold  italic block">
-                  (Delete profile permanently from database)
-                </span>
-              </div>
-            ) : (
-              <div>
-                <div className="flex gap-5">
+                      <span className="text-sm mt-3 w-full text-[#010D3E] font-semibold  italic block">
+                        (Schedule Meeting with talent and notify)
+                      </span>
+                    </div>
+                  )}
+                  {notifyPrompt && (
+                    <form onSubmit={handleSubmit(onTalentSubmit)}>
+                      <div className="flex gap-3 formdivs mt-4">
+                        <input
+                          type="url"
+                          placeholder="Enter calendly meeting link"
+                          {...register("meetingUrl", {
+                            required: validationRules.url.required,
+                            pattern: validationRules.url.pattern,
+                          })}
+                        />
+                        <button
+                          type="submit"
+                          className="basis-[20%] p-3 bg-[#010D3E] text-white shadow-sm rounded-lg btn-hover"
+                          disabled={isSubmitting}
+                        >
+                          {loading ? (
+                            <div className="flex items-center justify-center">
+                              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                              loading
+                            </div>
+                          ) : (
+                            "Notify"
+                          )}
+                        </button>
+                      </div>
+                    </form>
+                  )}
+                  {!deletePrompt ? (
+                    <div>
+                      <button
+                        className="py-4 px-6 bg-red-700 text-white rounded-md font-semibold mt-14 btn-hover hover:bg-red-800"
+                        onClick={() => setDeletePrompt(true)}
+                      >
+                        Delete Talent Profile
+                      </button>
+                      <span className="text-sm mt-3 w-full text-[#010D3E] font-semibold  italic block">
+                        (Delete profile permanently from database)
+                      </span>
+                    </div>
+                  ) : (
+                    <div>
+                      <div className="flex gap-5">
+                        <button
+                          className="py-4 px-9 bg-red-700 text-white rounded-md font-semibold mt-14 btn-hover hover:bg-red-800"
+                          onClick={deleteProfile}
+                        >
+                          Delete
+                        </button>
+                        <button
+                          className="py-4 px-9 bg-[#010D3E] text-white rounded-md font-semibold mt-14 btn-hover "
+                          onClick={() => setDeletePrompt(false)}
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                      <span className="text-sm mt-3 w-full text-[#010D3E] font-semibold  italic block">
+                        (Delete profile permanently from database)
+                      </span>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <div>
                   <button
-                    className="py-4 px-9 bg-red-700 text-white rounded-md font-semibold mt-14 btn-hover hover:bg-red-800"
-                    onClick={deleteProfile}
+                    className="py-4 px-6 bg-red-700 text-white rounded-md font-semibold mt-14 btn-hover hover:bg-red-800"
+                    onClick={() => setDeletePrompt(true)}
                   >
-                    Delete
+                    Delete Talent Profile
                   </button>
-                  <button
-                    className="py-4 px-9 bg-[#010D3E] text-white rounded-md font-semibold mt-14 btn-hover "
-                    onClick={() => setDeletePrompt(false)}
-                  >
-                    Cancel
-                  </button>
+                  <span className="text-sm mt-3 w-full text-[#010D3E] font-semibold  italic block">
+                    (Delete profile permanently from database)
+                  </span>
                 </div>
-                <span className="text-sm mt-3 w-full text-[#010D3E] font-semibold  italic block">
-                  (Delete profile permanently from database)
-                </span>
-              </div>
-            )}
+              )}
+            </>
           </section>
         ) : (
           <section>
