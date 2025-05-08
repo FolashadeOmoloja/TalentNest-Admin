@@ -47,9 +47,9 @@ const page = () => {
     }
 
     // Check for talent duplicates
-    if (!talentIds.has(application.talent._id)) {
-      talentIds.add(application.talent._id);
-      uniqueTalents.push(application.talent);
+    if (!talentIds.has(application.talent?._id)) {
+      talentIds.add(application.talent?._id);
+      uniqueTalents.push(application?.talent);
     }
   });
 
