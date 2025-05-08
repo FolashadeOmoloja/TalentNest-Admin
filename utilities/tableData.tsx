@@ -99,7 +99,7 @@ export const talentsColumn: Column<userObject>[] = [
     Header: "",
     accessor: "filename",
     Cell: ({ row }: { row: { original: userObject } }) => {
-      return <DownloadResumeBotton filename={row.original.filename} />;
+      return <DownloadResumeBotton filename={row.original.resume} />;
     },
   },
   {
