@@ -29,6 +29,8 @@ const CompanyTable = () => {
       company.accountStatus?.toLowerCase().includes(accountStatus.toLowerCase())
     );
   };
+
+  const company = changeTable === 0 ? filterCompanies(""):[];
   const recruiting = changeTable === 1 ? filterCompanies("recruiting") : [];
 
   const activeFunc = (idx: number) => {
@@ -70,14 +72,14 @@ const CompanyTable = () => {
           </p>
         ) : (
           <MainTable<userCompanyObject>
-            data={companies}
+            data={company}
             columns={companyColumn}
           />
         )
       ) : changeTable === 1 ? (
         loading ? (
           <Loader2 className=" h-14 w-14 animate-spin ml-10 mt-10 text-[#010D3E]" />
-        ) : companies.length === 0 ? (
+        ) : recruiting.length === 0 ? (
           <p className="mt-10 text-[#010D3E] italic text-2xl">
             No data available at the moment.
           </p>
