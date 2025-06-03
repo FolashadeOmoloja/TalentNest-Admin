@@ -29,7 +29,7 @@ const ApplicantsCard = ({ item, idx }: { item: Applicants; idx: number }) => {
   };
   return (
     <section className="py-6">
-      <div className="rounded-lg w-full p-5 border-[#22cbeda6] border-2">
+      <div className="rounded-lg w-full p-5 border-[#001E80] border-2">
         <div className=" flex justify-between max-sm:flex-col max-sm:gap-5 max-sm:items-center max-sm:text-center">
           <div className="text-sm flex flex-col basis-1/2 justify-between max-sm:gap-3">
             <div className="w-[200px] h-[200px]  rounded-lg">

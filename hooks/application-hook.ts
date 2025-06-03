@@ -1,4 +1,4 @@
-import { setApplication } from "@/redux/slices/applicationSlice";
+import { setApplication, setJobId } from "@/redux/slices/applicationSlice";
 import { setLoading } from "@/redux/slices/authSlice";
 import { setSuccessApplicants } from "@/redux/slices/successAplicantsSlice";
 import { APPLICATION_API_END_POINT } from "@/utilities/constants/constants";
@@ -29,7 +29,8 @@ export const useGetApplicants = () => {
       );
       if (response.data.success) {
         dispatch(setApplication(response.data.job.applicants));
-        if (response.data.job.applicants.talent) {
+        dispatch(setJobId(jobId));
+        if (response.data.job.applicants) {
           router.push(`/control-room/manage-jobs/applications/${encodedId}`);
         } else {
           toast.error("No applicants found");
@@ -141,4 +142,35 @@ export const updateApplicationStatus = () => {
   };
 
   return { handleUpdate, loading };
+};
+
+export const extractApplicationText = () => {
+  const [loading, setLoading] = useState(false);
+  const [results, setResults] = useState(null);
+  const { jobId } = useSelector((store: any) => store.application);
+
+  const extractText = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.post(
+        `${APPLICATION_API_END_POINT}/extract-resumes/${jobId}`,
+        {
+          withCredientials: true,
+        }
+      );
+      if (response.data.success) {
+        setResults(response.data.data);
+      }
+    } catch (error: any) {
+      const errorMessage =
+        error.response?.data?.message ||
+        error.message ||
+        "Failed to fetch jobs";
+      toast.error(errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { loading, results, extractText };
 };

@@ -8,12 +8,14 @@ import { FaArrowLeft } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 import MainTable from "../Elements/Table/MainTable";
 import { useRouter } from "next/navigation";
+import { extractApplicationText } from "@/hooks/application-hook";
 
 type IsActiveState = {
   [key: number]: boolean;
 };
 const ApplicationsTable = () => {
   const { application } = useSelector((store: any) => store.application);
+  const { loading, results, extractText } = extractApplicationText();
   const filterArr = [
     "Active Application",
     "Shortlisted Talents",
@@ -35,7 +37,7 @@ const ApplicationsTable = () => {
   const interview = changeTable === 1 ? filterApplications("interview") : [];
   const hired = changeTable === 2 ? filterApplications("hired") : [];
   const declined = changeTable === 3 ? filterApplications("declined") : [];
-  console.log(underReview);
+
   const activeFunc = (idx: number) => {
     const newState: IsActiveState = {};
     filterArr.forEach((_, i) => (newState[i] = i === idx));
@@ -115,6 +117,21 @@ const ApplicationsTable = () => {
           />
         )
       ) : null}
+      <button
+        className="bg-black text-white p-3 rounded-md"
+        onClick={extractText}
+      >
+        {loading ? (
+          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+        ) : (
+          "      Extract text"
+        )}
+      </button>
+      {results && (
+        <pre className="mt-2 max-h-96 overflow-auto">
+          {JSON.stringify(results, null, 2)}
+        </pre>
+      )}
     </section>
   );
 };
