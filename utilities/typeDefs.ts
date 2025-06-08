@@ -69,6 +69,7 @@ export interface Applicants {
   _id: string;
   job: string;
   status: string;
+  score: number;
   createdAt: string;
   talent: userObject;
 }

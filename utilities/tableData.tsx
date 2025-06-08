@@ -584,7 +584,24 @@ export const ApplicationsColumns: Column<Applicants>[] = [
     accessor: "talent",
     Cell: ({ row }: { row: { index: number; original: Applicants } }) => {
       const postDate = formatTimeDifference(row.original.createdAt);
-      return <ApplicantsCard item={row.original} idx={row.index} />;
+      return (
+        <ApplicantsCard item={row.original} key={row.index} isUnderReview />
+      );
+    },
+  },
+];
+export const ShortListAndInterviewColumns: Column<Applicants>[] = [
+  {
+    Header: "",
+    accessor: "talent",
+    Cell: ({ row }: { row: { index: number; original: Applicants } }) => {
+      return (
+        <ApplicantsCard
+          item={row.original}
+          key={row.index}
+          isUnderReview={false}
+        />
+      );
     },
   },
 ];

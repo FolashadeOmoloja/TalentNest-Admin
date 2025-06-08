@@ -1,6 +1,10 @@
 "use client";
 import loading from "@/app/loading";
-import { ApplicationsColumns, companyColumn } from "@/utilities/tableData";
+import {
+  ApplicationsColumns,
+  companyColumn,
+  ShortListAndInterviewColumns,
+} from "@/utilities/tableData";
 import { Applicants, userCompanyObject } from "@/utilities/typeDefs";
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
@@ -16,11 +20,11 @@ type IsActiveState = {
 };
 const ApplicationsTable = () => {
   const { application } = useSelector((store: any) => store.application);
-  const { loading, results, extractText } = extractApplicationText();
   const { jobId } = useSelector((store: any) => store.application);
   const filterArr = [
     "Active Application",
     "Shortlisted Talents",
+    "Scheduled Interviews",
     "Hired Talents",
     "Declined",
   ];
@@ -36,9 +40,10 @@ const ApplicationsTable = () => {
 
   const underReview =
     changeTable === 0 ? filterApplications("under review") : [];
-  const interview = changeTable === 1 ? filterApplications("shortlisted") : [];
-  const hired = changeTable === 2 ? filterApplications("hired") : [];
-  const declined = changeTable === 3 ? filterApplications("declined") : [];
+  const shortlist = changeTable === 1 ? filterApplications("shortlisted") : [];
+  const interview = changeTable === 2 ? filterApplications("interview") : [];
+  const hired = changeTable === 3 ? filterApplications("hired") : [];
+  const declined = changeTable === 4 ? filterApplications("declined") : [];
 
   const activeFunc = (idx: number) => {
     const newState: IsActiveState = {};
@@ -76,13 +81,29 @@ const ApplicationsTable = () => {
             No data available at the moment.
           </p>
         ) : (
+          <>
+             <MainTable<Applicants>
+               data={underReview}
+               columns={ApplicationsColumns}
+               borderNone="border-none"
+             />
+            <TalentMatchProgress jobId={jobId} activeFunc={activeFunc}/>
+          </>
+
+        )
+      ) : changeTable === 1 ? (
+        shortlist.length === 0 ? (
+          <p className="mt-10 text-[#010D3E] italic text-2xl">
+            No data available at the moment.
+          </p>
+        ) : (
           <MainTable<Applicants>
-            data={underReview}
-            columns={ApplicationsColumns}
+            data={shortlist}
+            columns={ShortListAndInterviewColumns}
             borderNone="border-none"
           />
         )
-      ) : changeTable === 1 ? (
+      ) : changeTable === 2 ? (
         interview.length === 0 ? (
           <p className="mt-10 text-[#010D3E] italic text-2xl">
             No data available at the moment.
@@ -90,11 +111,11 @@ const ApplicationsTable = () => {
         ) : (
           <MainTable<Applicants>
             data={interview}
-            columns={ApplicationsColumns}
+            columns={ShortListAndInterviewColumns}
             borderNone="border-none"
           />
         )
-      ) : changeTable === 2 ? (
+      ) : changeTable === 3 ? (
         hired.length === 0 ? (
           <p className="mt-10 text-[#010D3E] italic text-2xl">
             No data available at the moment.
@@ -102,11 +123,11 @@ const ApplicationsTable = () => {
         ) : (
           <MainTable<Applicants>
             data={hired}
-            columns={ApplicationsColumns}
+            columns={ShortListAndInterviewColumns}
             borderNone="border-none"
           />
         )
-      ) : changeTable === 3 ? (
+      ) : changeTable === 4 ? (
         declined.length === 0 ? (
           <p className="mt-10 text-[#010D3E] italic text-2xl">
             No data available at the moment.
@@ -114,12 +135,12 @@ const ApplicationsTable = () => {
         ) : (
           <MainTable<Applicants>
             data={declined}
-            columns={ApplicationsColumns}
+            columns={ShortListAndInterviewColumns}
             borderNone="border-none"
           />
         )
       ) : null}
-      <TalentMatchProgress jobId={jobId} />
+    
     </section>
   );
 };
