@@ -590,7 +590,7 @@ export const ApplicationsColumns: Column<Applicants>[] = [
     },
   },
 ];
-export const ShortListAndInterviewColumns: Column<Applicants>[] = [
+export const ShortListColumns: Column<Applicants>[] = [
   {
     Header: "",
     accessor: "talent",
@@ -600,6 +600,22 @@ export const ShortListAndInterviewColumns: Column<Applicants>[] = [
           item={row.original}
           key={row.index}
           isUnderReview={false}
+        />
+      );
+    },
+  },
+];
+export const InterviewColumns: Column<Applicants>[] = [
+  {
+    Header: "",
+    accessor: "talent",
+    Cell: ({ row }: { row: { index: number; original: Applicants } }) => {
+      return (
+        <ApplicantsCard
+          item={row.original}
+          key={row.index}
+          isUnderReview={false}
+          interview
         />
       );
     },

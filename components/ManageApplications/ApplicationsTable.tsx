@@ -1,19 +1,20 @@
 "use client";
-import loading from "@/app/loading";
 import {
   ApplicationsColumns,
-  companyColumn,
-  ShortListAndInterviewColumns,
+  InterviewColumns,
+  ShortListColumns,
 } from "@/utilities/tableData";
-import { Applicants, userCompanyObject } from "@/utilities/typeDefs";
-import { Loader2 } from "lucide-react";
-import { useState } from "react";
+import { Applicants } from "@/utilities/typeDefs";
 import { FaArrowLeft } from "react-icons/fa6";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import MainTable from "../Elements/Table/MainTable";
 import { useRouter } from "next/navigation";
-import { extractApplicationText } from "@/hooks/application-hook";
 import TalentMatchProgress from "./ResumeMatch";
+import React from "react";
+import {
+  setActive,
+  setChangeTable,
+} from "@/redux/slices/scheduledMeetingSlice";
 
 type IsActiveState = {
   [key: number]: boolean;
@@ -22,15 +23,17 @@ const ApplicationsTable = () => {
   const { application } = useSelector((store: any) => store.application);
   const { jobId } = useSelector((store: any) => store.application);
   const filterArr = [
-    "Active Application",
-    "Shortlisted Talents",
-    "Scheduled Interviews",
-    "Hired Talents",
-    "Declined",
+    ["Application", "Appl."],
+    ["Shortlisted", "Shortl."],
+    ["Interviews", "Interv."],
+    ["Hired", "Hir."],
+    ["Declined", "Decl."],
   ];
-  const [active, setActive] = useState<IsActiveState>({ 0: true });
-  const [changeTable, setChangeTable] = useState(0);
+  const { changeTable, active } = useSelector(
+    (store: any) => store.scheduledMeeting
+  );
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const filterApplications = (status: string) => {
     return application.filter((application: { status: string }) =>
@@ -48,8 +51,8 @@ const ApplicationsTable = () => {
   const activeFunc = (idx: number) => {
     const newState: IsActiveState = {};
     filterArr.forEach((_, i) => (newState[i] = i === idx));
-    setActive(newState);
-    setChangeTable(idx);
+    dispatch(setActive(newState));
+    dispatch(setChangeTable(idx));
   };
 
   return (
@@ -64,15 +67,26 @@ const ApplicationsTable = () => {
       <h2 className="text-2xl font-bold mb-1 bg-text">
         Manage Talent's Application for Job Post
       </h2>
-      <div className="flex w-full text-[#626263] md:text-lg font-bold mt-16 mb-5 border-b border-[#CCD2D9]">
+      <div className="flex w-full font-bold mt-16 mb-5 border-b border-[#CCD2D9] ">
         {filterArr.map((item, idx) => (
-          <span
-            className={`tab ${active[idx] ? "active" : ""} max-sm:h-[50px]`}
-            key={idx}
-            onClick={() => activeFunc(idx)}
-          >
-            {item}
-          </span>
+          <React.Fragment key={idx}>
+            <span
+              className={`tab ${
+                active[idx] ? "active" : ""
+              } max-sm:h-[30px] max-[500px]:text-xs max-lsm:hidden`}
+              onClick={() => activeFunc(idx)}
+            >
+              {item[0]}
+            </span>
+            <span
+              className={`tab ${
+                active[idx] ? "active" : ""
+              } max-sm:h-[30px] lsm:hidden text-xs`}
+              onClick={() => activeFunc(idx)}
+            >
+              {item[1]}
+            </span>
+          </React.Fragment>
         ))}
       </div>
       {changeTable === 0 ? (
@@ -82,14 +96,13 @@ const ApplicationsTable = () => {
           </p>
         ) : (
           <>
-             <MainTable<Applicants>
-               data={underReview}
-               columns={ApplicationsColumns}
-               borderNone="border-none"
-             />
-            <TalentMatchProgress jobId={jobId} activeFunc={activeFunc}/>
+            <MainTable<Applicants>
+              data={underReview}
+              columns={ApplicationsColumns}
+              borderNone="border-none"
+            />
+            <TalentMatchProgress jobId={jobId} activeFunc={activeFunc} />
           </>
-
         )
       ) : changeTable === 1 ? (
         shortlist.length === 0 ? (
@@ -99,7 +112,7 @@ const ApplicationsTable = () => {
         ) : (
           <MainTable<Applicants>
             data={shortlist}
-            columns={ShortListAndInterviewColumns}
+            columns={ShortListColumns}
             borderNone="border-none"
           />
         )
@@ -111,7 +124,7 @@ const ApplicationsTable = () => {
         ) : (
           <MainTable<Applicants>
             data={interview}
-            columns={ShortListAndInterviewColumns}
+            columns={InterviewColumns}
             borderNone="border-none"
           />
         )
@@ -123,7 +136,7 @@ const ApplicationsTable = () => {
         ) : (
           <MainTable<Applicants>
             data={hired}
-            columns={ShortListAndInterviewColumns}
+            columns={ApplicationsColumns}
             borderNone="border-none"
           />
         )
@@ -135,12 +148,11 @@ const ApplicationsTable = () => {
         ) : (
           <MainTable<Applicants>
             data={declined}
-            columns={ShortListAndInterviewColumns}
+            columns={ApplicationsColumns}
             borderNone="border-none"
           />
         )
       ) : null}
-    
     </section>
   );
 };

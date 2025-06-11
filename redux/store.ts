@@ -12,6 +12,7 @@ import faqSlice from "./slices/faqSlice";
 import filterSlice from "./slices/filterSlice";
 import adminSlice from "./slices/adminSlice";
 import successApplicantsSlice from "./slices/successAplicantsSlice";
+import scheduledMeetingSlice from "./slices/scheduledMeetingSlice";
 import {
   persistStore,
   persistReducer,
@@ -41,6 +42,7 @@ const rootReducer = combineReducers({
   companyJobs: companyJobsSlice,
   application: applicationSlice,
   blogPost: blogPostSlice,
+  scheduledMeeting: scheduledMeetingSlice,
   review: reviewSlice,
   faq: faqSlice,
   filters: filterSlice,

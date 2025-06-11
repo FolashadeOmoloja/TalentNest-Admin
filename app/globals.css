@@ -95,6 +95,13 @@
   .notice-div a {
     @apply text-[#010D3E] font-semibold;
   }
+
+  .time-span{
+    @apply rounded-md border-[0.2px] font-semibold text-[#001E80] border-[#001E80] transition duration-200 w-full py-2 centered cursor-pointer
+  }
+  .selected-time{
+    @apply py-2 basis-1/2 rounded-md cursor-pointer
+  }
 }
 .dash-nav {
   @apply bg-white cursor-pointer shadow-sm centered w-[51px] h-[51px] rounded-full text-[24px] text-[#010D3E];
@@ -145,6 +152,42 @@
 
 .tab.active::before {
   width: 100%;
+}
+
+/* react-day-tool override styles */
+
+.rdp-month_caption,.rdp-nav,.rdp-caption_label {
+  display: none !important;
+}
+
+.rdp-day,.rdp-weekday {
+  font-size: 14px !important;
+}
+
+.rdp-day,.rdp-day_button {
+  width: 41px !important;
+  height: 41px !important;
+}
+
+.rdp-root {
+  max-width: 300px !important;
+  margin: auto !important;
+}
+
+.rdp-selected .rdp-day_button,
+.rdp-day:hover {
+  background-color: #001E80;
+  color: #ffffff;
+  border-radius: 50%;
+  border: none !important;
+}
+
+.rdp-today {
+  color: #000000 !important;
+}
+
+.rdp-today:hover {
+  color: #ffffff !important;
 }
 
 @media (prefers-color-scheme: light) {

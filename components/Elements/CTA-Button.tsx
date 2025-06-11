@@ -1,4 +1,5 @@
 "use client";
+import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { FaArrowRight } from "react-icons/fa6";
 
@@ -15,6 +16,7 @@ interface ButtonProps {
   isFunc?: boolean;
   func?: () => void;
   disabled?: boolean;
+  loading?: boolean;
 }
 
 const CTABTN: React.FC<ButtonProps> = ({
@@ -30,6 +32,7 @@ const CTABTN: React.FC<ButtonProps> = ({
   isFunc = false,
   func,
   disabled = false,
+  loading = false,
 }) => {
   const router = useRouter();
 
@@ -47,7 +50,15 @@ const CTABTN: React.FC<ButtonProps> = ({
       onClick={() => handleSignInClick(route)}
       disabled={disabled}
     >
-      <span>{CTA}</span>
+      {loading ? (
+        <div className="flex items-center justify-center">
+          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          Please wait
+        </div>
+      ) : (
+        <span>{CTA}</span>
+      )}
+
       <span
         className={`text-sm ${color} ${showIcon ? "icon-animate" : "hidden"}`}
       >
@@ -58,3 +69,24 @@ const CTABTN: React.FC<ButtonProps> = ({
 };
 
 export default CTABTN;
+
+// export const FormBtn = ({
+//   className = "",
+//   cta = "",
+//   loading = false,
+//   disabled = false,
+//   funct
+// }) => {
+//   return (
+//     <button type="submit" className={className} disabled={disabled}>
+//       {loading ? (
+//         <div className="flex items-center justify-center">
+//           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+//           Please wait
+//         </div>
+//       ) : (
+//         cta
+//       )}
+//     </button>
+//   );
+// };

@@ -129,3 +129,18 @@ export interface Admin {
   password: string;
   accountRole: string;
 }
+
+export interface MeetingType {
+  recipientName: string;
+  recipientEmail: string;
+  createdBy: string;
+  date: string;
+  time: string;
+  meetingUrl?: string | null;
+  jobTitle?: string | null;
+  company?: string | null;
+  applicantId?: string | null;
+  jobId?: string | null;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
