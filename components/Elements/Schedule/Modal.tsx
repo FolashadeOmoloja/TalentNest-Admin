@@ -10,9 +10,11 @@ import { handleCreateSchedule } from "@/hooks/schedule-meeting-hook";
 
 export default function ScheduleModal({
   talentBool = true,
+  scheduled = false,
   func,
 }: {
   talentBool?: boolean;
+  scheduled?: boolean;
   func: () => void;
 }) {
   const [open, setOpen] = useState(false);
@@ -73,7 +75,13 @@ export default function ScheduleModal({
         route={""}
         isFunc
         func={handleOpen}
-        CTA={talentBool ? "Schedule Interview" : "Schedule Meeting"}
+        CTA={
+          scheduled
+            ? "Reschedule"
+            : talentBool
+            ? "Schedule Interview"
+            : "Schedule Meeting"
+        }
         backGround="bg-[#001E80]"
         width="w-[180px] hover:bg-[#001E80]/95 transition ease-in text-sm font-semibold"
         height2="h-[40px] text-sm"

@@ -132,10 +132,11 @@ const ApplicantsCard = ({
         {/*update status and visit profile for scheduling */}
         {isUnderReview === false && (
           <div className="mt-5">
-            <div className="p-3 text-[#001E80] flex justify-between bg-white rounded-lg font-bold items-center text-sm transition duration-300 max-sm:flex-col max-sm:gap-3">
-              <ChangeStatusDropdown item={item} />
+            <div className="p-3 text-[#001E80] flex justify-between bg-white rounded-lg font-bold items-center text-sm transition duration-300 max-md:flex-col max-md:gap-3">
+              {interview && <ChangeStatusDropdown item={item} />}
               <VisitProfileBtn visitProfile={visitProfile} />
-              <ScheduleModal func={changeAppl} />
+              <button>View Notes</button>
+              <ScheduleModal func={changeAppl} scheduled={interview} />
             </div>
           </div>
         )}
