@@ -95,3 +95,73 @@ export const VisitProfileBtn = ({
     </div>
   );
 };
+
+export const GoBack = ({
+  setChange,
+}: {
+  setChange: React.Dispatch<React.SetStateAction<boolean>>;
+}) => (
+  <div
+    onClick={() => setChange(false)}
+    className="cursor-pointer hover:bg-[#f3f6fc] rounded-full transition duration-200"
+  >
+    <svg
+      width="28"
+      height="28"
+      viewBox="0 0 36 36"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="group"
+    >
+      <rect
+        x="0.5"
+        y="0.5"
+        width="35"
+        height="35"
+        rx="17.5"
+        className="fill-white group-hover:fill-[#001e800e] transition-all"
+      />
+      <rect x="0.5" y="0.5" width="35" height="35" rx="17.5" stroke="#EFEFEF" />
+      <path
+        d="M24.5625 18.6429L11.4375 18.6429M11.4375 18.6429L17.0625 24.2679M11.4375 18.6429L17.0625 13.0179"
+        stroke="#001E80"
+        strokeWidth="2.25"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  </div>
+);
+
+export const Cancel = ({ handleClose }: { handleClose?: () => void }) => (
+  <div
+    onClick={handleClose}
+    className="cursor-pointer hover:bg-[#f3f6fc] rounded-full transition duration-200"
+  >
+    <svg
+      width="28"
+      height="28"
+      viewBox="0 0 36 36"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="group"
+    >
+      <rect
+        x="0.5"
+        y="0.5"
+        width="35"
+        height="35"
+        rx="17.5"
+        className="fill-white group-hover:fill-[#001e800e] transition-all"
+      />
+      <rect x="0.5" y="0.5" width="35" height="35" rx="17.5" stroke="#EFEFEF" />
+      <path
+        d="M23.625 24.2679L12.375 13.0179M23.625 13.0179L12.375 24.2679"
+        stroke="#001E80"
+        strokeWidth="2.25"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  </div>
+);
