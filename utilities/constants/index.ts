@@ -98,3 +98,45 @@ export function formatTimeDifference(timestamp: string): string {
 
   return `${weekday} ${day}${daySuffix} ${month}, ${year}`;
 }
+
+export function getFormattedStartDate(): string {
+  const today = new Date();
+
+  // Step 1: Add 7 days
+  const oneWeekFromToday = new Date(today);
+  oneWeekFromToday.setDate(today.getDate() + 7);
+
+  // Step 2: Get next Monday after 1 week
+  const day = oneWeekFromToday.getDay();
+  const daysUntilMonday = (8 - day) % 7 || 7;
+  const nextMonday = new Date(oneWeekFromToday);
+  nextMonday.setDate(oneWeekFromToday.getDate() + daysUntilMonday);
+
+  // Step 3: Format: Mon 23rd 2025
+  const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const suffixes = ["th", "st", "nd", "rd"];
+
+  const getOrdinalSuffix = (day: number) => {
+    if (day >= 11 && day <= 13) return "th";
+    const lastDigit = day % 10;
+    return suffixes[lastDigit] || "th";
+  };
+
+  const weekday = weekdays[nextMonday.getDay()];
+  const date = nextMonday.getDate();
+  const suffix = getOrdinalSuffix(date);
+  const year = nextMonday.getFullYear();
+
+  return `${weekday} ${date}${suffix} ${year}`;
+}
+
+export const toolbarOptions = {
+  toolbar: [
+    ["bold", "italic", "underline", "strike"],
+    ["link"],
+    [{ list: "ordered" }, { list: "bullet" }],
+    [{ header: [1, 2, 3, 4, 5, 6, false] }],
+    // [{ font: [] }],
+    [{ align: [] }],
+  ],
+};

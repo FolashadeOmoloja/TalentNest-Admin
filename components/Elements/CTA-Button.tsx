@@ -46,7 +46,7 @@ const CTABTN: React.FC<ButtonProps> = ({
 
   return (
     <button
-      className={`${width} h-[${height}] ${height2} ${backGround} ${color} rounded-[6px] flex items-center justify-center gap-2 font-semibold button-container`}
+      className={`${width} h-[${height}] ${height2} ${backGround} ${color} rounded-[6px] flex items-center justify-center gap-2 font-semibold button-container text-sm`}
       onClick={() => handleSignInClick(route)}
       disabled={disabled}
     >

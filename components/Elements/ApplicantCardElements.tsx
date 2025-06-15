@@ -2,6 +2,7 @@ import { updateApplicationStatus } from "@/hooks/application-hook";
 import { Applicants } from "@/utilities/typeDefs";
 import { useState } from "react";
 import { FaArrowRight, FaCaretDown } from "react-icons/fa6";
+import ConfirmationModal from "./HireOrDecline/ConfirmationModal";
 
 const DetailsCard = ({
   title,
@@ -55,17 +56,22 @@ export const ChangeStatusDropdown = ({ item }: { item: Applicants }) => {
   return (
     <div className="relative">
       {isDropdownVisible && (
-        <div className="absolute top-[-150px] text-black text-sm left-0 bg-white shadow-lg p-3  z-10 border rounded-md xxsm:w-[180px]">
+        <div className="absolute top-[-120px] text-black text-sm left-0 bg-white shadow-lg  z-10 border rounded-md xxsm:w-[180px]">
           {statuses.map((status) => (
-            <button
+            // <button
+            //   key={status}
+            //   className=""
+            //   onClick={() => handleStatusUpdate(status)}
+            //   disabled={loading}
+            // >
+            //   {" "}
+            //   {loading ? "Updating..." : status}
+            // </button>
+            <ConfirmationModal
+              hire={status === "Hired"}
               key={status}
-              className="block w-full text-left p-1 hover:bg-[#010D3E] hover:text-white cursor-pointer"
-              onClick={() => handleStatusUpdate(status)}
-              disabled={loading}
-            >
-              {" "}
-              {loading ? "Updating..." : status}
-            </button>
+              talentDets={item}
+            />
           ))}
         </div>
       )}

@@ -5,6 +5,7 @@ const applicationSlice = createSlice({
   initialState: {
     application: [],
     jobId: "",
+    offerDraft: "",
   },
   reducers: {
     setApplication: (state, action) => {
@@ -13,8 +14,12 @@ const applicationSlice = createSlice({
     setJobId: (state, action) => {
       state.jobId = action.payload;
     },
+    setOfferDraft: (state, action) => {
+      state.offerDraft = action.payload;
+    },
   },
 });
 
-export const { setApplication,setJobId } = applicationSlice.actions;
+export const { setApplication, setJobId, setOfferDraft } =
+  applicationSlice.actions;
 export default applicationSlice.reducer;

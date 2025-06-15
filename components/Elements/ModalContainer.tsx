@@ -12,12 +12,16 @@ export default function ModalContainer({
   open,
   handleClose,
   handleOpen,
+  background = "bg-[#001E80]",
+  color = "text-white",
 }: {
   btnCta: string;
   btnWidthStyles: string;
   dialogClassName: string;
   children: React.ReactNode;
   open: boolean;
+  background?: string;
+  color?: string;
   handleOpen: () => void;
   handleClose: () => void;
 }) {
@@ -28,9 +32,10 @@ export default function ModalContainer({
         isFunc
         func={handleOpen}
         CTA={btnCta}
-        backGround="bg-[#001E80]"
+        backGround={background}
         width={btnWidthStyles}
         height2="h-[40px] text-sm"
+        color={color}
       />
       <Dialog
         open={open}
