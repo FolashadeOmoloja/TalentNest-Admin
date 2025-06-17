@@ -41,8 +41,8 @@ const page = () => {
 
   successApplications.forEach((application: Application) => {
     // Check for job duplicates
-    if (!jobIds.has(application.job._id)) {
-      jobIds.add(application.job._id);
+    if (!jobIds.has(application.job?._id)) {
+      jobIds.add(application.job?._id);
       uniqueJobs.push(application.job);
     }
 

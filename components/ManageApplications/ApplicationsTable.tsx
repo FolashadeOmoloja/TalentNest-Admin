@@ -15,6 +15,9 @@ import {
   setActive,
   setChangeTable,
 } from "@/redux/slices/scheduledMeetingSlice";
+import CTABTN from "../Elements/CTA-Button";
+import ClosejobModal from "../Elements/HireOrDecline/ClosejobModal";
+import { useEndHireProcess } from "@/hooks/hire-decline-hook";
 
 type IsActiveState = {
   [key: number]: boolean;
@@ -22,6 +25,7 @@ type IsActiveState = {
 const ApplicationsTable = () => {
   const { application } = useSelector((store: any) => store.application);
   const { jobId } = useSelector((store: any) => store.application);
+
   const filterArr = [
     ["Application", "Appl."],
     ["Shortlisted", "Shortl."],
@@ -134,11 +138,14 @@ const ApplicationsTable = () => {
             No data available at the moment.
           </p>
         ) : (
-          <MainTable<Applicants>
-            data={hired}
-            columns={ApplicationsColumns}
-            borderNone="border-none"
-          />
+          <>
+            <MainTable<Applicants>
+              data={hired}
+              columns={ApplicationsColumns}
+              borderNone="border-none"
+            />
+            <ClosejobModal jobId={jobId} />
+          </>
         )
       ) : changeTable === 4 ? (
         declined.length === 0 ? (

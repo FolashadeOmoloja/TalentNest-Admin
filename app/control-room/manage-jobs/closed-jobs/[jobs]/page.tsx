@@ -9,11 +9,7 @@ const page = ({ params }: { params: { myJobsId: string } }) => {
   return (
     <>
       <DashboardNavbar />
-      <ClosedJobPosts
-        jobData={job}
-        href="/control-room/manage-jobs"
-        update={false}
-      />
+      <ClosedJobPosts jobData={job} href="/control-room/manage-jobs" />
     </>
   );
 };

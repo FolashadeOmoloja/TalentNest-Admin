@@ -32,6 +32,7 @@ const ConfirmCard = ({
           route={""}
           isFunc
           func={handleClose}
+          disabled={loading}
           CTA={"Cancel"}
           backGround="bg-red-600"
           width="sm:w-[170px] w-full hover:bg-red-700 transition ease-in text-sm font-semibold"

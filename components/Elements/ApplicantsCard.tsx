@@ -1,13 +1,13 @@
 import { setTalent } from "@/redux/slices/talentSlice";
 import { Applicants } from "@/utilities/typeDefs";
 import { useRouter } from "next/navigation";
-import { FaArrowRight } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import ScheduleModal from "./Schedule/Modal";
 import DetailsCard, {
   ChangeStatusDropdown,
   VisitProfileBtn,
 } from "./ApplicantCardElements";
+import ViewNotes from "./HireOrDecline/ViewNotes";
 
 const ApplicantsCard = ({
   item,
@@ -31,7 +31,6 @@ const ApplicantsCard = ({
   const { scheduledMeeting } = useSelector(
     (store: any) => store.scheduledMeeting
   );
-
   let meetingDate = "";
   let meetingTime = "";
   scheduledMeeting.forEach((meeting: any) => {
@@ -135,7 +134,11 @@ const ApplicantsCard = ({
             <div className="p-3 text-[#001E80] flex justify-between bg-white rounded-lg font-bold items-center text-sm transition duration-300 max-md:flex-col max-md:gap-3">
               {interview && <ChangeStatusDropdown item={item} />}
               <VisitProfileBtn visitProfile={visitProfile} />
-              <button>View Notes</button>
+              <ViewNotes
+                notes={
+                  item.feedback ? item.feedback : "Not available at the moment"
+                }
+              />
               <ScheduleModal func={changeAppl} scheduled={interview} />
             </div>
           </div>

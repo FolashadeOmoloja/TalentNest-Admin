@@ -4,14 +4,16 @@ import ModalContainer from "../ModalContainer";
 import { Applicants } from "@/utilities/typeDefs";
 import CTABTN from "../CTA-Button";
 import ConfirmCard from "./ConfirmCard";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getFormattedStartDate, toolbarOptions } from "@/utilities/constants";
 import {
   useCreateOfferLetterDraft,
+  useDeclineCandidate,
   useHireCandidate,
 } from "@/hooks/hire-decline-hook";
 import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
+import { setOfferDraft } from "@/redux/slices/applicationSlice";
 const ReactQuill = dynamic(() => import("react-quill"), {
   ssr: false,
   loading: () => (
@@ -35,16 +37,32 @@ const ConfirmationModal = ({
   const { job } = useSelector((store: any) => store.job);
   const { createOffer, loading: confirmLoading } = useCreateOfferLetterDraft();
   const { hireCandidate, loading: hireLoading } = useHireCandidate();
+  const { declineCandidate, declineLoading } = useDeclineCandidate();
+  const dispatch = useDispatch();
   useEffect(() => {
     setContent(offerDraft);
   }, [offerDraft]);
-  console.log(content);
+
+  const data = {
+    html: content,
+    talentId: talentDets.talent._id,
+    talentMail: talentDets.talent.emailAddress,
+    companyName: job.company.companyName,
+    jobRole: job.role,
+    talentName: `${talentDets.talent.firstName} ${talentDets.talent.lastName}`,
+    jobId: job._id,
+  };
+
   const handleOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
+    setTimeout(() => {
+      setHireDisplay("confirm");
+      dispatch(setOfferDraft(""));
+    }, 100);
   };
   const startDate = getFormattedStartDate();
   const handleCreateDraft = async () => {
@@ -60,14 +78,12 @@ const ConfirmationModal = ({
   };
 
   const handleHireAppl = async () => {
-    const data = {
-      html: content,
-      talentId: talentDets.talent._id,
-      talentMail: talentDets.talent.emailAddress,
-      companyName: job.company.companyName,
-      jobRole: job.role,
-    };
     await hireCandidate(data);
+    dispatch(setOfferDraft(""));
+  };
+
+  const handleDeclineAppl = async () => {
+    await declineCandidate(data);
   };
   return (
     <ModalContainer
@@ -77,7 +93,7 @@ const ConfirmationModal = ({
       color="text-black"
       handleOpen={handleOpen}
       open={open}
-      handleClose={handleClose}
+      handleClose={() => {}}
       background="bg-transparent"
     >
       <main>
@@ -108,17 +124,29 @@ const ConfirmationModal = ({
                     modules={toolbarOptions}
                   />
                 </div>{" "}
-                <CTABTN
-                  route={""}
-                  isFunc
-                  func={handleHireAppl}
-                  CTA={"Send Offer To Candidate"}
-                  backGround="bg-[#001E80]"
-                  width="px-2 sm:w-[200px] w-full hover:bg-[#001E80]/95  transition ease-in  mt-16"
-                  height2="h-[40px]"
-                  disabled={hireLoading}
-                  loading={hireLoading}
-                />
+                <div className=" mt-16 flex gap-3 max-sm:flex-col">
+                  <CTABTN
+                    route={""}
+                    isFunc
+                    func={handleHireAppl}
+                    CTA={"Send Offer To Candidate"}
+                    backGround="bg-[#001E80]"
+                    width="px-2 sm:w-[200px] w-full hover:bg-[#001E80]/95  transition ease-in  "
+                    height2="h-[40px]"
+                    disabled={hireLoading}
+                    loading={hireLoading}
+                  />
+                  <CTABTN
+                    route={""}
+                    isFunc
+                    func={handleClose}
+                    CTA={"Cancel"}
+                    backGround="bg-red-600"
+                    width="sm:w-[170px] w-full hover:bg-red-700 transition ease-in text-sm font-semibold"
+                    height2="h-[40px]"
+                    disabled={hireLoading}
+                  />
+                </div>
               </div>
             ) : null}
           </>
@@ -128,9 +156,9 @@ const ConfirmationModal = ({
               "Declining this candidate will remove them from the hiring pipeline. Do you wish to proceed?"
             }
             ctaBtn={"Decline"}
-            actionFunc={() => {}}
+            actionFunc={handleDeclineAppl}
             handleClose={handleClose}
-            loading={false}
+            loading={declineLoading}
           />
         )}
       </main>

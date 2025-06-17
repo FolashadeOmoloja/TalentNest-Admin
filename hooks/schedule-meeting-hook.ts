@@ -31,7 +31,6 @@ export const handleCreateSchedule = () => {
       const { success, message, updatedApplicants, updatedScheduledMeeting } =
         response.data;
       if (success) {
-        console.log("done");
         dispatch(setApplication(updatedApplicants.applicants));
         dispatch(setScheduledMeeting(updatedScheduledMeeting));
         dispatch(setActive({ 2: true }));

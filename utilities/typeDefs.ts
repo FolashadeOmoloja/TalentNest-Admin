@@ -70,6 +70,7 @@ export interface Applicants {
   job: string;
   status: string;
   score: number;
+  feedback: string;
   createdAt: string;
   talent: userObject;
 }
