@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { FaArrowRight } from "react-icons/fa6";
 
 interface ButtonProps {
-  className?: string;
+  text?: string;
   showIcon?: boolean;
   CTA?: string;
   route: string;
@@ -20,7 +20,6 @@ interface ButtonProps {
 }
 
 const CTABTN: React.FC<ButtonProps> = ({
-  className,
   showIcon = false,
   CTA,
   route,
@@ -33,6 +32,7 @@ const CTABTN: React.FC<ButtonProps> = ({
   func,
   disabled = false,
   loading = false,
+  text = "text-sm",
 }) => {
   const router = useRouter();
 
@@ -46,7 +46,7 @@ const CTABTN: React.FC<ButtonProps> = ({
 
   return (
     <button
-      className={`${width} h-[${height}] ${height2} ${backGround} ${color} rounded-[6px] flex items-center justify-center gap-2 font-semibold button-container text-sm`}
+      className={` ${text} ${width} h-[${height}] ${height2} ${backGround} ${color} rounded-[6px] flex items-center justify-center gap-2 font-semibold button-container`}
       onClick={() => handleSignInClick(route)}
       disabled={disabled}
     >
@@ -59,9 +59,7 @@ const CTABTN: React.FC<ButtonProps> = ({
         <span>{CTA}</span>
       )}
 
-      <span
-        className={`text-sm ${color} ${showIcon ? "icon-animate" : "hidden"}`}
-      >
+      <span className={`${color} ${showIcon ? "icon-animate" : "hidden"}`}>
         <FaArrowRight />
       </span>
     </button>
@@ -69,24 +67,3 @@ const CTABTN: React.FC<ButtonProps> = ({
 };
 
 export default CTABTN;
-
-// export const FormBtn = ({
-//   className = "",
-//   cta = "",
-//   loading = false,
-//   disabled = false,
-//   funct
-// }) => {
-//   return (
-//     <button type="submit" className={className} disabled={disabled}>
-//       {loading ? (
-//         <div className="flex items-center justify-center">
-//           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-//           Please wait
-//         </div>
-//       ) : (
-//         cta
-//       )}
-//     </button>
-//   );
-// };

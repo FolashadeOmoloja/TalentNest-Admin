@@ -10,6 +10,7 @@ interface Props {
   setMeetingLink: React.Dispatch<React.SetStateAction<string>>;
   func: () => void;
   loading: boolean;
+  company: boolean;
 }
 
 export default function MeetingConfirmationCard({
@@ -20,13 +21,16 @@ export default function MeetingConfirmationCard({
   recipent,
   func,
   loading,
+  company,
 }: Props) {
   const divClass = "flex items-center gap-3 mb-4 text-gray-700 text-sm";
 
   return (
     <div className="w-full">
       <h2 className="text-xl font-semibold mb-4">
-        Meeting with {recipent?.firstName} {recipent?.lastName}
+        {company
+          ? `Meeting with ${(recipent as userCompanyObject)?.companyName}`
+          : `Meeting with ${recipent?.firstName} ${recipent?.lastName}`}
       </h2>
 
       <div className={divClass}>

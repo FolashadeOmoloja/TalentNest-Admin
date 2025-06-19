@@ -29,7 +29,7 @@ export const useLoginAdmin = () => {
       const { success, message, admin } = response.data;
       if (success) {
         Cookies.set("accessToken", "admin", {
-          expiresIn: "1d",
+          expires: 1,
           secure: true,
           sameSite: "None",
         });

@@ -132,6 +132,7 @@ export interface Admin {
 }
 
 export interface MeetingType {
+  _id?: string;
   recipientName: string;
   recipientEmail: string;
   createdBy: string;
@@ -141,6 +142,7 @@ export interface MeetingType {
   jobTitle?: string | null;
   company?: string | null;
   applicantId?: string | null;
+  companyId?: string | null;
   jobId?: string | null;
   createdAt?: Date;
   updatedAt?: Date;

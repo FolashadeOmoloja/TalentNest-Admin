@@ -1,8 +1,4 @@
-import { FaCamera } from "react-icons/fa";
-import { useRef, ChangeEvent } from "react";
 import { userObject, userCompanyObject } from "@/utilities/typeDefs";
-
-import { Loader2 } from "lucide-react";
 
 interface ProfilePhotoProps {
   user: userObject | userCompanyObject;

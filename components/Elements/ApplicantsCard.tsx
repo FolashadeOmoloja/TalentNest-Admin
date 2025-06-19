@@ -8,6 +8,7 @@ import DetailsCard, {
   VisitProfileBtn,
 } from "./ApplicantCardElements";
 import ViewNotes from "./HireOrDecline/ViewNotes";
+import { setMeetingId } from "@/redux/slices/scheduledMeetingSlice";
 
 const ApplicantsCard = ({
   item,
@@ -21,9 +22,6 @@ const ApplicantsCard = ({
   const dispatch = useDispatch();
   const router = useRouter();
   const encodedId = btoa(item?.talent._id as string);
-  const changeAppl = () => {
-    dispatch(setTalent(item?.talent));
-  };
   const visitProfile = () => {
     changeAppl();
     router.push(`/control-room/manage-talents/${encodedId}`);
@@ -33,6 +31,7 @@ const ApplicantsCard = ({
   );
   let meetingDate = "";
   let meetingTime = "";
+  let meetingId = "";
   scheduledMeeting.forEach((meeting: any) => {
     if (meeting.applicantId === item?.talent._id) {
       const dateObj = new Date(meeting.date);
@@ -46,9 +45,13 @@ const ApplicantsCard = ({
       });
 
       meetingTime = meeting.time;
+      meetingId = meeting._id;
     }
   });
-
+  const changeAppl = () => {
+    dispatch(setTalent(item?.talent));
+    dispatch(setMeetingId(meetingId));
+  };
   return (
     <section className="py-6">
       <div className="rounded-lg w-full p-5 max-xsm:p-3 border-[#001E80] border-2">

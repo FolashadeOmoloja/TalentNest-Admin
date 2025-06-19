@@ -4,6 +4,7 @@ const scheduledMeetingSlice = createSlice({
   name: "scheduledMeeting",
   initialState: {
     scheduledMeeting: [],
+    meetingId: null,
     changeTable: 0,
     active: { 0: true },
   },
@@ -17,9 +18,12 @@ const scheduledMeetingSlice = createSlice({
     setActive: (state, action) => {
       state.active = action.payload;
     },
+    setMeetingId: (state, action) => {
+      state.meetingId = action.payload;
+    },
   },
 });
 
-export const { setScheduledMeeting, setChangeTable, setActive } =
+export const { setScheduledMeeting, setChangeTable, setActive, setMeetingId } =
   scheduledMeetingSlice.actions;
 export default scheduledMeetingSlice.reducer;

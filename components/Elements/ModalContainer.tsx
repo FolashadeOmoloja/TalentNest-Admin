@@ -14,6 +14,7 @@ export default function ModalContainer({
   handleOpen,
   background = "bg-[#001E80]",
   color = "text-white",
+  text = "text-sm",
 }: {
   btnCta: string;
   btnWidthStyles: string;
@@ -24,6 +25,7 @@ export default function ModalContainer({
   color?: string;
   handleOpen: () => void;
   handleClose: () => void;
+  text?: string;
 }) {
   return (
     <div>
@@ -34,8 +36,9 @@ export default function ModalContainer({
         CTA={btnCta}
         backGround={background}
         width={btnWidthStyles}
-        height2="h-[40px] text-sm"
+        height2="h-[40px]"
         color={color}
+        text={text}
       />
       <Dialog
         open={open}

@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
 import { setCompanyJobs } from "@/redux/slices/companyJobsSlice";
+import { setAllJobs } from "@/redux/slices/jobSlice";
 
 export const useGetAllJobs = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ export const useGetAllJobs = () => {
           withCredentials: true,
         });
         setJobs(response.data.jobs);
+        dispatch(setAllJobs(response.data.jobs));
       } catch (error: any) {
         const errorMessage =
           error.response?.data?.message ||

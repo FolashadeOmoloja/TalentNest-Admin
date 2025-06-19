@@ -1,5 +1,5 @@
 import { setLoading } from "@/redux/slices/authSlice";
-import { setTalent } from "@/redux/slices/talentSlice";
+import { setAllTalents, setTalent } from "@/redux/slices/talentSlice";
 import { ADMIN_API_END_POINT } from "@/utilities/constants/constants";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -23,6 +23,7 @@ export const useGetAllTalents = () => {
           withCredentials: true,
         });
         setTalents(response.data.talents);
+        dispatch(setAllTalents(response.data.talents));
       } catch (error: any) {
         const errorMessage =
           error.response?.data?.message ||

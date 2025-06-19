@@ -9,6 +9,7 @@ import {
 } from "recharts";
 import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa6";
+import SchedulePreview from "./SchedulePreview";
 type analytics = {
   analtyticsTitle: string;
   stats: number;
@@ -62,39 +63,50 @@ const DashboardLayout = ({
             </div>
           ))}
         </aside>
-        <BarChat chartData={chartData} />
-        <div className="grid md:grid-cols-2  gap-4">
+        <div className="xl:col-span-3 grid grid-cols-1 xslg:grid-cols-3 gap-4 mb-3">
+          <BarChat chartData={chartData} />
+          <div className="bg-white xsm:p-4 rounded-2xl shadow-sm">
+            <h2 className="xsm:text-lg bg-text font-semibold mb-2 max-xsm:mt-3 max-xsm:ml-3">
+              Scheduled Dates
+            </h2>
+            {/* Calendar Placeholder */}
+            <div className="  rounded-md flex items-center justify-center">
+              <SchedulePreview />
+            </div>
+          </div>
+        </div>
+        <div className="xl:col-span-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <StatsCard
             title={"Manage Jobs"}
-            desc={"View and manage active job listings and applications"}
+            desc={"Manage job listings and applications"}
             link={"/control-room/manage-jobs"}
             linkName="Go to jobs"
             stats={stat1}
           />
           <StatsCard
             title={"Manage Talents"}
-            desc={"Review and shortlist registered talents"}
+            desc={"Manage registered talents"}
             link={"/control-room/manage-talents"}
             linkName="Go to talents"
             stats={stat2}
           />
           <StatsCard
             title={"Manage Companies"}
-            desc={"Keep track of registered companies and their activities"}
+            desc={"Keep track of companies activities"}
             link={"/control-room/manage-companies"}
             linkName="Go to companies"
             stats={stat3}
           />
           <StatsCard
             title={"Employed Talents"}
-            desc={"View successful hires and their details"}
+            desc={"View successful hires"}
             link={"/control-room/successful-hires"}
             linkName="Go to hires"
             stats={stat4}
           />
           <StatsCard
             title={"Blog Posts"}
-            desc={"Manage and create blog posts for the platform"}
+            desc={"Manage and create blog posts "}
             link={"/control-room/manage-reviews"}
             linkName="Go to blogs"
           />
@@ -112,7 +124,7 @@ const DashboardLayout = ({
           />
           <StatsCard
             title={"Filters"}
-            desc={"Manage TalentNest filters/dropdowns"}
+            desc={"Manage TalentNest Job filters"}
             link={"/control-room/manage-filters"}
             linkName="Go to Filters"
           />
@@ -139,10 +151,12 @@ const StatsCard = ({
 }) => {
   return (
     <div className="rounded-2xl shadow-md bg-white cursor-pointer p-6 border-[0.1px] border-gray-300">
-      <h2 className="text-xl bg-text font-semibold mb-4">{title}</h2>
+      <h2 className="xsm:text-lg bg-text font-semibold mb-4">{title}</h2>
       <div className="mb-3">
-        <p className="text-gray-500">{desc}</p>
-        <p className="text-[#010D3E] italic text-sm">{stats}</p>
+        <p className="text-gray-500 text-sm">{desc}</p>
+        <p className="text-[#010D3E] italic text-xs">
+          {stats ? `(${stats})` : ""}
+        </p>
       </div>
       <Link
         href={link}
@@ -157,7 +171,7 @@ const StatsCard = ({
 
 const BarChat = ({ chartData }: { chartData: chartData }) => {
   return (
-    <div className="bg-white p-4 max-sm:px-0 rounded-2xl shadow-sm mb-6">
+    <div className="bg-white p-4 max-sm:px-0 rounded-2xl shadow-sm  lg:col-span-2">
       <h2 className="text-lg font-semibold mb-4 max-sm:ml-4  bg-text">
         Monthly Activities
       </h2>

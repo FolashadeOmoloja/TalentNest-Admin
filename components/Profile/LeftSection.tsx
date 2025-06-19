@@ -69,9 +69,9 @@ export default LeftSection;
 export const HireLeftSection = ({ user }: { user: userCompanyObject }) => {
   return (
     <aside className="basis-[30%] flex flex-col gap-10">
-      <div className="bg-white rounded-2xl shadow-md h-[600px] flex flex-col px-4 centered ">
+      <div className="bg-white rounded-2xl shadow-md h-[600px] flex flex-col px-4 centered text-center">
         <ProfilePhotoHandler user={user} talent={false} />
-        <span className="font-semibold text-3xl mt-8 bg-text">
+        <span className="font-semibold text-3xl mt-8 bg-text ">
           {user?.companyName}
         </span>
         <span className="font-bold text-gray-500 mt-6">

@@ -27,10 +27,10 @@ const config: Config = {
       screens: {
         xxsm: "300px",
         xsm: "375px",
-        lsm:"390px",
+        lsm: "390px",
         slg: "880px",
         sslg: "980px",
-        xslg: "1100px",
+        xslg: "1150px",
         xlg: "1250px",
         xxl: "1440px",
       },

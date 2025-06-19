@@ -630,13 +630,13 @@ export const successHireColumns: Column<SuccessApplications>[] = [
       return (
         <div className="flex flex-col gap-2 mt-4 mb-4">
           <span className="text-[#010D3E] font-medium">
-            {row.original.job.title}
+            {row.original.job?.title}
           </span>
           <div className="flex flex-col gap-4 text-base">
-            <span>{row.original.job.company.companyName}</span>
+            <span>{row.original.job?.company.companyName}</span>
             <span>
-              {row.original.job.company.location},{" "}
-              {row.original.job.company.country}{" "}
+              {row.original.job?.company.location},{" "}
+              {row.original.job?.company.country}{" "}
             </span>
           </div>
         </div>
@@ -672,8 +672,7 @@ export const successHireColumns: Column<SuccessApplications>[] = [
           <div className="flex flex-col gap-2">
             <p>
               <span className="font-semibold">Name: </span>{" "}
-              {row.original.talent.firstName}
-              {row.original.talent.lastName}
+              {row.original.talent.firstName} {row.original.talent.lastName}
             </p>
             <p>
               <span className="font-semibold">
