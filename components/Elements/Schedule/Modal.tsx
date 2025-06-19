@@ -75,36 +75,31 @@ export default function ScheduleModal({
   };
 
   const createSchedule = async () => {
-    if (talentBool) {
-      const data = {
-        recipientName: `${talent.firstName}`,
-        recipientEmail: talent.emailAddress,
-        createdBy: user._id,
-        date: selectedDate ? selectedDate.toString() : "",
-        time: time,
-        meetingUrl: meetingLink,
-        jobTitle: job.role,
-        company: job.company.companyName,
-        applicantId: talent._id,
-        jobId: job._id,
-      };
-      if (scheduled) {
-        await onUpdate(data, meetingId);
-      } else {
-        await onSubmit(data);
-      }
+    const isTalent = talentBool;
+    const baseData = {
+      recipientName: isTalent ? talent.firstName : company.firstName,
+      recipientEmail: isTalent ? talent.emailAddress : company.emailAddress,
+      createdBy: user._id,
+      date: selectedDate ? selectedDate.toString() : "",
+      time,
+      meetingUrl: meetingLink,
+      company: isTalent ? job.company.companyName : company.companyName,
+    };
+    const data = isTalent
+      ? {
+          ...baseData,
+          jobTitle: job.role,
+          applicantId: talent._id,
+          jobId: job._id,
+        }
+      : {
+          ...baseData,
+          companyId: company._id,
+        };
+    if (scheduled) {
+      await onUpdate(data, meetingId);
     } else {
-      const data = {
-        recipientName: `${company.firstName}`,
-        recipientEmail: company.emailAddress,
-        createdBy: user._id,
-        date: selectedDate ? selectedDate.toString() : "",
-        time: time,
-        meetingUrl: meetingLink,
-        company: company.companyName,
-        companyId: company._id,
-      };
-      onCreate(data);
+      await (isTalent ? onSubmit(data) : onCreate(data));
     }
 
     handleClose();
@@ -125,7 +120,7 @@ export default function ScheduleModal({
           : `${
               talentBool
                 ? "w-[180px] hover:bg-[#001E80]/95"
-                : "h-[56px] bg-[#010D3E] hover:bg-[#010D3E]/95 px-6 mt-6 "
+                : "h-[56px] w-[180px] bg-[#010D3E] hover:bg-[#010D3E]/95  mt-6 "
             }  transition ease-in  font-semibold`
       }
       dialogClassName={

@@ -15,6 +15,7 @@ const SchedulePreview = () => {
   const [modalDisplay, setModalDisplay] = useState("preview");
   const [showRescheduleModal, setShowRescheduleModal] = useState(false);
   const [daySelected, setDaySelected] = useState("");
+  const [talentBool, setTalentBool] = useState(true);
   const [highlightedDates, setHighlightedDates] = useState<Set<string>>(
     new Set()
   );
@@ -111,6 +112,7 @@ const SchedulePreview = () => {
             setShowRescheduleModal={setShowRescheduleModal}
             selectedDateStr={daySelected}
             setMeetingSch={setMeetingSch}
+            setTalentBool={setTalentBool}
           />
         ) : modalDisplay === "reschedule" ? (
           <ScheduleModal
@@ -118,6 +120,7 @@ const SchedulePreview = () => {
             preview={showRescheduleModal}
             setModalDisplay={setModalDisplay}
             scheduled
+            talentBool={talentBool}
           />
         ) : null}
       </div>

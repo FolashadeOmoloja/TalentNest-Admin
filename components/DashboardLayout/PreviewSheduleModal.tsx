@@ -1,4 +1,9 @@
-import { JobPosted, MeetingType, userObject } from "@/utilities/typeDefs";
+import {
+  JobPosted,
+  MeetingType,
+  userCompanyObject,
+  userObject,
+} from "@/utilities/typeDefs";
 import ModalContainer from "../Elements/ModalContainer";
 import { Cancel } from "../Elements/ApplicantCardElements";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,6 +12,7 @@ import { setJob } from "@/redux/slices/jobSlice";
 import { handleDeleteSchedule } from "@/hooks/schedule-meeting-hook";
 import { useEffect } from "react";
 import { setMeetingId } from "@/redux/slices/scheduledMeetingSlice";
+import { setCompany } from "@/redux/slices/companySlice";
 
 const PreviewScheduleModal = ({
   open,
@@ -16,11 +22,13 @@ const PreviewScheduleModal = ({
   setShowRescheduleModal,
   selectedDateStr,
   setMeetingSch,
+  setTalentBool,
 }: {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setModalDisplay: React.Dispatch<React.SetStateAction<string>>;
   setShowRescheduleModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setTalentBool: React.Dispatch<React.SetStateAction<boolean>>;
   meetingSch: MeetingType[];
   selectedDateStr: string;
   setMeetingSch: React.Dispatch<
@@ -29,6 +37,7 @@ const PreviewScheduleModal = ({
 }) => {
   const { allTalents } = useSelector((store: any) => store.talent);
   const { allJobs } = useSelector((store: any) => store.job);
+  const { allCompanies } = useSelector((store: any) => store.company);
   const { scheduledMeeting } = useSelector(
     (store: any) => store.scheduledMeeting
   );
@@ -48,12 +57,23 @@ const PreviewScheduleModal = ({
   }, [scheduledMeeting]);
 
   const handleReschedule = (id: string, meetingId: string, jobId?: string) => {
-    const talentDet = allTalents.find(
-      (talent: userObject) => talent._id === id
-    );
-    const jobDet = allJobs.find((job: JobPosted) => job._id === jobId);
-    dispatch(setJob(jobDet));
-    dispatch(setTalent(talentDet));
+    if ((jobId as string).length > 0) {
+      setTalentBool(true);
+      const talentDet = allTalents.find(
+        (talent: userObject) => talent._id === id
+      );
+      const jobDet = allJobs.find((job: JobPosted) => job._id === jobId);
+      dispatch(setJob(jobDet));
+      dispatch(setTalent(talentDet));
+    } else {
+      setTalentBool(false);
+      const currentCompany = allCompanies.find(
+        (company: userCompanyObject) => company._id === id
+      );
+      dispatch(setCompany(currentCompany));
+      console.log("company", currentCompany);
+    }
+
     dispatch(setMeetingId(meetingId));
     setOpen(false);
     setModalDisplay("reschedule");
@@ -88,7 +108,9 @@ const PreviewScheduleModal = ({
                 </p>
                 <p className="text-sm">Email: {meeting.recipientEmail}</p>
                 <p className="text-sm">Time: {meeting.time}</p>
-                <p className="text-sm">Job: {meeting.jobTitle}</p>
+                {meeting.jobId && (
+                  <p className="text-sm">Job: {meeting.jobTitle}</p>
+                )}
                 <p className="text-sm">Company: {meeting.company}</p>
 
                 <div className="flex gap-2 mt-3">

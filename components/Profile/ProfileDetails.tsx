@@ -9,7 +9,11 @@ import {
 } from "@/hooks/admin-analytics-hook";
 import { useGetAllCompanyEmployed } from "@/hooks/application-hook";
 import { useGetCompanyJobs } from "@/hooks/jobPosts-hook";
-import { userObject, userCompanyObject } from "@/utilities/typeDefs";
+import {
+  userObject,
+  userCompanyObject,
+  MeetingType,
+} from "@/utilities/typeDefs";
 import { Loader2 } from "lucide-react";
 import { useSelector } from "react-redux";
 import ScheduleModal from "../Elements/Schedule/Modal";
@@ -48,6 +52,12 @@ const CompanyProfile = ({
   user: userCompanyObject;
   loading: boolean;
 }) => {
+  const { scheduledMeeting } = useSelector(
+    (store: any) => store.scheduledMeeting
+  );
+  const hasMeetingWithCompany = scheduledMeeting.some(
+    (meeting: MeetingType) => meeting.companyId === user._id
+  );
   const { fetchJobs } = useGetCompanyJobs();
   const { fetchApplicants } = useGetAllCompanyEmployed();
   const viewJobs = () => {
@@ -93,7 +103,12 @@ const CompanyProfile = ({
         (View all jobs posted by company)
       </span>
       <div>
-        <ScheduleModal func={() => {}} talentBool={false} text="text-base" />
+        <ScheduleModal
+          func={() => {}}
+          talentBool={false}
+          text="text-base"
+          scheduled={hasMeetingWithCompany}
+        />
         <span className="text-sm mt-3 w-full text-[#010D3E] font-semibold  italic block">
           (Schedule Meeting with company)
         </span>

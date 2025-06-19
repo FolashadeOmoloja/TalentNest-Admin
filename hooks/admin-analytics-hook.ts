@@ -1,4 +1,5 @@
 import { setLoading } from "@/redux/slices/authSlice";
+import { setAllCompanies } from "@/redux/slices/companySlice";
 import { setAllTalents, setTalent } from "@/redux/slices/talentSlice";
 import { ADMIN_API_END_POINT } from "@/utilities/constants/constants";
 import axios from "axios";
@@ -60,6 +61,7 @@ export const useGetAllCompanies = () => {
           }
         );
         setCompanies(response.data.companies);
+        dispatch(setAllCompanies(response.data.companies));
       } catch (error: any) {
         const errorMessage =
           error.response?.data?.message ||
