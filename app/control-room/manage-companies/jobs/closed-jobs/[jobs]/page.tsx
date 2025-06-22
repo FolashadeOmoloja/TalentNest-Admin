@@ -12,7 +12,6 @@ const page = ({ params }: { params: { myJobsId: string } }) => {
       <ClosedJobPosts
         jobData={job}
         href="/control-room/manage-companies/jobs"
-        update={true}
       />
     </>
   );
