@@ -23,81 +23,41 @@ const TalentMatchProgress = ({
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState("");
   const dispatch = useDispatch();
-  const startMatching = async () => {
-    setProgress(0);
-    setError("");
-    setCurrentStep("Starting...");
+  const startMatching = () => {
+    const eventSource = new EventSource(
+      `${APPLICATION_API_END_POINT}/match-talents/${jobId}`,
+      { withCredentials: true }
+    );
 
-    try {
-      const response = await fetch(
-        `${APPLICATION_API_END_POINT}/match-talents/${jobId}`,
-        {
-          method: "GET",
-          credentials: "include",
-        }
-      );
-      const reader = response?.body?.getReader();
-      const decoder = new TextDecoder("utf-8");
-      let partial = "";
+    eventSource.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      console.log(data);
 
-      if (!reader) {
-        setError("Unable to read response stream.");
-        return;
+      if (
+        data.step &&
+        stepToProgress[data.step as keyof typeof stepToProgress]
+      ) {
+        setCurrentStep(steps[Object.keys(stepToProgress).indexOf(data.step)]);
+        setProgress(stepToProgress[data.step as keyof typeof stepToProgress]);
       }
 
-      while (true) {
-        const { value, done } = await reader.read();
-        if (done) break;
-
-        partial += decoder.decode(value, { stream: true });
-
-        // Handle possible multiple chunks
-        const chunks = partial.split("}{").map((chunk, index, arr) => {
-          if (arr.length === 1) return chunk;
-          if (index === 0) return chunk + "}";
-          else if (index === arr.length - 1) return "{" + chunk;
-          return "{" + chunk + "}";
-        });
-
-        for (const chunk of chunks) {
-          try {
-            const clean = chunk.trim();
-            if (!clean) continue;
-            const data = JSON.parse(clean);
-
-            // Update progress
-            if (
-              data.step &&
-              stepToProgress[data.step as keyof typeof stepToProgress]
-            ) {
-              setCurrentStep(
-                steps[Object.keys(stepToProgress).indexOf(data.step)]
-              );
-              setProgress(
-                stepToProgress[data.step as keyof typeof stepToProgress]
-              );
-            }
-
-            if (data.step === "done" && data.matches) {
-              dispatch(setApplication(data.updatedJob.applicants));
-              setTimeout(() => {
-                activeFunc(1);
-              }, 1000);
-            }
-
-            if (data.success === false) {
-              setError(data.message || "Something went wrong");
-              setProgress(0);
-              return;
-            }
-          } catch (e) {
-            // Ignore invalid JSON until next chunk
-          }
-        }
+      if (data.step === "done" && data.matches) {
+        dispatch(setApplication(data.updatedJob.applicants));
+        setTimeout(() => activeFunc(1), 1000);
+        eventSource.close();
       }
-    } catch (err: any) {
-      setError("Connection error: " + err.message);
-    }
+
+      if (data.success === false) {
+        setError(data.message || "Something went wrong");
+        setProgress(0);
+        eventSource.close();
+      }
+    };
+
+    eventSource.onerror = () => {
+      setError("Connection error");
+      eventSource.close();
+    };
   };
 
   return (

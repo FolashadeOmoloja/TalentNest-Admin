@@ -202,7 +202,10 @@
   pointer-events: auto !important;
   cursor: pointer;
 }
-
+.description li {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+}
 @media (prefers-color-scheme: light) {
   :root {
   }

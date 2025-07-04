@@ -60,6 +60,7 @@ export interface JobPosted {
   company: userCompanyObject;
   applicants?: userObject[];
   description: string;
+  descriptionHtml?: string;
   createdAt: string;
   updatedAt: string;
   skills: string[];

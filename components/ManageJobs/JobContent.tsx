@@ -1,6 +1,7 @@
 import { JobPosted } from "@/utilities/typeDefs";
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa6";
+import DOMPurify from "dompurify";
 
 const JobContent = ({
   buttonDiv,
@@ -9,6 +10,9 @@ const JobContent = ({
   buttonDiv: React.ReactNode;
   jobData: JobPosted;
 }) => {
+  const sanitizedDescription = DOMPurify.sanitize(
+    jobData.descriptionHtml ? jobData.descriptionHtml : jobData.description
+  );
   return (
     <section className="section-container relative top-[96px] mt-[50px]  max-w-4xl lg:p-0 mx-auto space-y-8">
       <Link
@@ -47,9 +51,16 @@ const JobContent = ({
           <h2 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2">
             Description
           </h2>
-          <p className="text-gray-700 text-sm leading-relaxed tracking-[0.02em]">
-            {jobData?.description}
-          </p>
+          <div className="tracking-[1%] text-gray-700 text-sm leading-relaxed ">
+            <div
+              className="ql-editor template-quill description"
+              dangerouslySetInnerHTML={{
+                __html: sanitizedDescription
+                  ? sanitizedDescription
+                  : "No description available.",
+              }}
+            />
+          </div>
         </div>
 
         {/* Skills */}
