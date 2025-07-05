@@ -253,7 +253,9 @@ export const companyActiveColumns: Column<JobPosted>[] = [
               )}
             </div>
           </div>
-          <span>{row.original.company.companyName}</span>
+          <span className="text-center">
+            {row.original.company.companyName}
+          </span>
         </div>
       );
     },
@@ -352,7 +354,9 @@ export const closedJobsColumns: Column<JobPosted>[] = [
               )}
             </div>
           </div>
-          <span>{row.original.company.companyName}</span>
+          <span className="text-center">
+            {row.original.company.companyName}
+          </span>
         </div>
       );
     },

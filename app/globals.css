@@ -204,8 +204,12 @@
 }
 .description li {
   list-style-type: disc;
-  margin-left: 1.5rem;
 }
+
+.ql-editor.template-quill.description ul {
+  padding-left: 0;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
   }

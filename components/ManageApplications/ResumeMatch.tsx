@@ -22,8 +22,12 @@ const TalentMatchProgress = ({
   const [currentStep, setCurrentStep] = useState("");
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [failedMatch, setFailedMatch] = useState(false);
   const dispatch = useDispatch();
   const startMatching = () => {
+    setLoading(true);
+    setFailedMatch(false);
     const eventSource = new EventSource(
       `${APPLICATION_API_END_POINT}/match-talents/${jobId}`,
       { withCredentials: true }
@@ -44,6 +48,8 @@ const TalentMatchProgress = ({
       if (data.step === "done" && data.matches) {
         dispatch(setApplication(data.updatedJob.applicants));
         setTimeout(() => activeFunc(1), 1000);
+        setLoading(false);
+        setFailedMatch(false);
         eventSource.close();
       }
 
@@ -51,12 +57,16 @@ const TalentMatchProgress = ({
         setError(data.message || "Something went wrong");
         setProgress(0);
         eventSource.close();
+        setLoading(false);
+        setFailedMatch(true);
       }
     };
 
     eventSource.onerror = () => {
       setError("Connection error");
       eventSource.close();
+      setLoading(false);
+      setFailedMatch(true);
     };
   };
 
@@ -66,10 +76,11 @@ const TalentMatchProgress = ({
         route={""}
         isFunc
         func={startMatching}
-        CTA={progress == 100 ? "Re-Match" : "Start Matching"}
-        backGround="bg-[#001E80]"
+        CTA={progress == 100 || failedMatch ? "Re-Match" : "Start Matching"}
+        backGround={loading ? "bg-gray-700" : "bg-[#001E80]"}
         width="w-[200px] max-xxsm:w-full"
         height2="h-[50px] text-sm"
+        disabled={loading}
       />
       <div className="mt-4">
         <div className="mb-2 text-gray-700 font-medium text-sm">
