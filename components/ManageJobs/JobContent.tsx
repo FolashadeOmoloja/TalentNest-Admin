@@ -24,11 +24,11 @@ const JobContent = ({
       </Link>
 
       {/* Header */}
-      <div className="space-y-2 text-center">
+      <div className="space-y-2 smd:text-center">
         <h2 className="text-5xl font-bold text-[#010D3E] mb-5">
           {jobData?.title}
         </h2>
-        <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-600">
+        <div className="flex flex-wrap smd:justify-center gap-4 text-sm text-gray-600">
           <span className="bg-gray-100 px-3 py-1 rounded-full">
             📍 {jobData?.location}
           </span>
@@ -45,7 +45,7 @@ const JobContent = ({
       </div>
 
       {/* Main Card */}
-      <div className="bg-white rounded-2xl shadow-lg p-8 max-sm:p-4 space-y-8">
+      <div className="smd:bg-white rounded-2xl smd:shadow-lg p-8 max-sm:p-4 max-smd:p-0 space-y-8">
         {/* Description */}
         <div>
           <h2 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2">
