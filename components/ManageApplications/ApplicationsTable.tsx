@@ -105,6 +105,7 @@ const ApplicationsTable = () => {
               columns={ApplicationsColumns}
               borderNone="border-none"
             />
+            <TalentMatchProgress jobId={jobId} activeFunc={activeFunc} />
           </>
         )
       ) : changeTable === 1 ? (
@@ -159,7 +160,6 @@ const ApplicationsTable = () => {
           />
         )
       ) : null}
-      <TalentMatchProgress jobId={jobId} activeFunc={activeFunc} />
     </section>
   );
 };
